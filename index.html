@@ -148,16 +148,11 @@
               </p>
             </div> -->
             <div class="slider">
-              <div class="card">
-                <img id="img1"  src="./assets/projects/01.jpg" alt="" />
-                <div class="copy">
-                  <h1 class="proclass">1. Future Echoes</h1>
-                </div>
-              </div>
-              <div class="card">
+              
+              <div class="card" onclick="redirectToAbout()">
                 <img  id="img2" src="./assets/projects/02.jpg" alt="" />
                 <div class="copy">
-                  <h1 class="proclass">2. Silent Horizon</h1>
+                  <h1 class="proclass">4. Silent Horizon</h1>
                 </div>
               </div>
               <div class="card">
@@ -169,13 +164,13 @@
               <div class="card">
                 <img   id="img4" src="./assets/projects/04.jpg" alt="" />
                 <div class="copy">
-                  <h1 class="proclass">4. Mystic Today</h1>
+                  <h1 class="proclass">2. Uber</h1>
                 </div>
               </div>
               <div class="card">
                 <img  id="img5" src="./assets/projects/05.jpg" alt="" />
                 <div class="copy">
-                  <h1 class="proclass">5. Ethereal Noir</h1>
+                  <h1 class="proclass">1. Netflix</h1>
                 </div>
               </div>
             </div>
@@ -237,17 +232,17 @@
               <div class="items">
                 <div class="item">
                   <div class="item-index">01</div>
-                  <div class="item-name">Advanced Nanotech Fabrics</div>
-                  <div class="item-year">2022</div>
+                  <div class="item-name">Introduction to UnsupervisedLearning in Bioinformatics</div>
+                  <div class="item-year">2020</div>
                 </div>
                 <div class="item">
                   <div class="item-index">02</div>
-                  <div class="item-name">Natural Bio-luminescent Accents</div>
-                  <div class="item-year">2021</div>
+                  <div class="item-name">Reconstructing NoisedImages of Fashion-MNIST Dataset Using Auto encoders</div>
+                  <div class="item-year">2022</div>
                 </div>
                 <div class="item">
                   <div class="item-index">03</div>
-                  <div class="item-name">Integrated Electronic Wearables</div>
+                  <div class="item-name">Mudras and Yoga Positions Detection and Recognition utilising YOLOv7 and Faster R-CNN</div>
                   <div class="item-year">2023</div>
                 </div>
                 <div class="item">
@@ -264,36 +259,19 @@
             </div>
           </div>
         </div>
-        <div class="certificates">
-          <h1 class="title">Certificates</h1>
-          <div class="header-revealer"></div>
-          <div class="article-text">
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                repudiandae ullam aspernatur eveniet molestias architecto
-                labore facere delectus, impedit reiciendis quod dolore?
-                Exercitationem accusantium inventore eos ea commodi quis in
-                voluptatum voluptates corrupti ipsum obcaecati eveniet
-                voluptate, quisquam est distinctio?
-            </p>
 
-            <div class="roundedButton" style="overflow: hidden; margin: 1rem;" onMouseEnter="manageMouseEnter()" onMouseLeave="manageMouseLeave()">
-              <p>Check More</p>
-              <div class="circle"></div>
-            </div>
-          </div>
-        </div>
-        <div class="scrible">
-          <h1 class="title">Scrible Board</h1>
-          <div class="header-revealer"></div>
+        <div class="scrible"  style="overflow: hidden;">
+          <!-- <h1 class="title">Scrible Board</h1>
+          <div class="header-revealer"></div> -->
 
 
           
-          <div class="containerscrible">
-            <div id="scrible_container">
-              <div class="header">
-                <h1 style="color: black;">Codegrid</h1>
+          <div class="certcontainercanvas"  style="overflow: hidden;">
+            <div id="certcanvas_container"  style="overflow: hidden;">
+              <div class="certheader">
+                <h1>Certificates</h1>
               </div>
+            </div>
           </div>
 
           </div>
@@ -344,10 +322,15 @@
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="./script.js"></script>
 
+<!-- 
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://assets.codepen.io/16327/Flip.min.js"></script> -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.14.2/matter.min.js"></script>
     <script src="sketch.js"></script>
-    <script src="scrible.js"></script>
+    <!-- <script src="scrible.js"></script> -->
 
     <script type="module" src="./index.js"></script>
 

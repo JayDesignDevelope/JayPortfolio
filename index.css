@@ -435,7 +435,6 @@
   }
   
   .scrible {
-    padding: 2em 2.5em;
   
     display:flex;
     position: relative;
@@ -579,6 +578,7 @@
 
 .item-name {
   flex: 3;
+  line-height: 2rem;
 }
 
 .item-year {
@@ -712,6 +712,8 @@ img {
 .card {
   position: absolute;
   top: 50%;
+  cursor: pointer;
+
   left: 50%;
   width: 50%;
   height: 500px;
@@ -862,5 +864,68 @@ align-items: center;  color: #000;
   }
 }
 
+/* Certificates */
+
+
+
+
 
 /* scrible */
+
+.certheader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} 
+
+ .certheader h1 {
+  font-family: "Circular Std", sans-serif;
+  font-size: 12vw;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 175%;
+  color: #fff;
+  text-align: center;
+} 
+
+.certitem {
+  position: absolute;
+  padding: 0.5em 0.5em 4em 0.5em;
+  width: 200px;
+  height: 225px;
+  margin: 4rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.certitem img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+
+.certcanvas_container {
+  width: 400px; /* Set width as per your requirement */
+  height: 400px; /* Set height as per your requirement */
+  background-color: #760101; /* Example background color */
+  margin-top: 1px; /* Adjust margin as needed */
+  border: #000 2px solid;
+  display: flex;
+  overflow: hidden;
+}
+
+
+
+
+.certcontainercanvas {
+  display: flex;
+  width: 1200px;
+  overflow: hidden;
+  height: 800px;
+  border: #a92828 1px solid;
+  justify-content: center;
+  align-items: center;
+  }

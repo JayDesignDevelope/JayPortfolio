@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
 //•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
 let cardIndex =0
 
-document.addEventListener("click", function () {
+document.addEventListener("scroll", function () {
     if (isAnimating) return;
     isAnimating = true;
   
@@ -145,9 +145,7 @@ document.addEventListener("click", function () {
     procontainer.style.backgroundColor = colors[cardIndex];
   });
   
-
-
-
+  
 
 
   /* Sidebar in Hero for nav */
@@ -265,3 +263,65 @@ ScrollTrigger.create({
       })
       .catch(error => console.error('Error:', error));
   };
+
+
+
+
+// Certificates
+
+gsap.registerPlugin("ScrollTrigger");
+gsap.to(".wheel", {
+    rotate: () => -360,
+    ease: "none",
+    duration: images.length,
+    scrollTrigger: {
+      trigger: ".certificates", // Set the trigger to the div with class "certificates"
+      start: "top top", // Adjust start position if needed
+      end: "bottom bottom", // Adjust end position if needed
+      scrub: 1,
+      snap: 1 / images.length,
+      invalidateOnRefresh: true,
+    },
+  });
+  
+  function setupcert() {
+    let certificates = document.querySelector(".certificates");
+    let wheel = certificates.querySelector(".wheel");
+    let images = gsap.utils.toArray(".wheel__card", {container: certificates}); // Limit image search to the certificates container
+    let radius = wheel.offsetWidth / 2;
+    let center = wheel.offsetWidth / 2;
+    let total = images.length;
+    let slice = (2 * Math.PI) / total;
+  
+    images.forEach((item, i) => {
+      let angle = i * slice;
+  
+      let x = center + radius * Math.sin(angle);
+      let y = center - radius * Math.cos(angle);
+  
+      gsap.set(item, {
+        rotation: angle + "_rad",
+        xPercent: -50,
+        yPercent: -50,
+        x: x,
+        y: y,
+      });
+    });
+  }
+  
+  setupcert();
+  
+
+
+
+  // rediecting to projects
+  function redirectToAbout() {
+    // Redirect to the about.html page
+    window.location.href = "about.html";
+  }
+
+
+  document.querySelector('.card').onclick=function(){
+    window.location.href = "/about.html";
+
+  }
