@@ -150,7 +150,7 @@ document.addEventListener("scroll", function () {
 
   /* Sidebar in Hero for nav */
   document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".container");
+    const container = document.querySelector(".wrapper");
     const sidebar = document.querySelector(".herosidebar");
     const cards = gsap.utils.toArray(".herocard");
     const overlayToggle = document.querySelector(".overlay-toggle");
