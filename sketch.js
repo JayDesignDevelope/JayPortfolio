@@ -134,16 +134,33 @@ var s2 = function(sketch) {
     sketch.setup = function() {
     //   setupbgcert();
 
-    let canvas2=sketch.createCanvas(1200, 700);
+    // const myDiv = getElementById('certcanvas_container');
+            // const myCanvas = $('.grid-canvas');
+            // myCanvas.width = myDiv.offsetWidth;
+            // myCanvas.height = myDiv.offsetHeight;
+
+
+            const certContainerCanvas = document.querySelector('.certcontainercanvas');
+    
+            // Get the bounding rectangle
+            const rect = certContainerCanvas.getBoundingClientRect();
+            
+            // Get the width and height
+            const width = rect.width;
+            const height = rect.height;
+    let canvas2=sketch.createCanvas(width,height);
+
     canvas2.parent("certcanvas_container")
     engine = Engine.create();
     engine.world.gravity.y = 0;
     addBoundariescert();
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 10; i++) {
       let x = sketch.random(100, sketch.width - 100);
       let y = sketch.random(100, sketch.height - 100);
-      items.push(new Item(x, y, `./assets/scrible/img${i + 1}.jpg`));
+      items.push(new Item(x, y, `./assets/scrible/jpgs/img${i + 1}.jpg`));
+      items.push(new Item(x, y, `./assets/scrible/png/img${i + 1}.png`));
+
     }
     };
 
@@ -184,10 +201,8 @@ var s2 = function(sketch) {
         density: 0.002,
         angle: Math.random() * Math.PI * 2,
       };
-  
-      this.body = Bodies.rectangle(x, y, 100, 200, options);
+      this.body = Bodies.rectangle(x, y, 100, 100, options);
       World.add(engine.world, this.body);
-
       this.div = document.createElement("div");
       this.div.className = "certitem";
       this.div.style.left = `${this.body.position.x - 50}px`;
@@ -195,8 +210,6 @@ var s2 = function(sketch) {
       const img = document.createElement("img");
       img.src = imagePath;
       this.div.appendChild(img);
-
-
       const container2 = document.getElementById('certcanvas_container');
       if (container2) {
           container2.appendChild(this.div);

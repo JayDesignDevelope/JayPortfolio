@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Jay Portfolio</title>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
     <link rel="stylesheet" href="index.css" />
   </head>
@@ -60,35 +61,35 @@
             <div class="left-side">
 
                 <div class="tv">
-                  <h1 class="title">Digital<br>Designer</h1>
+                  <h1 class="title" style="color: #ffffff;">Digital<br><span></span></h1>
 
                     <!-- <div class="bg">push</div>
                     <div class="sm">the</div>
                     <div class="bg bottom">envelope</div> -->
-                </div>
-                <div class="text-container">
+                <!-- <div class="text-container">
                     <p>
                         Photography has become a big part of almost
                         every element of our lives.
                     </p>
-                    <p>
-                        It become widespread and diverse but we know that this is still a real form of art and
-                        magic.
+                   
+                    <div id="bio-container">
+                      
+                      <p>Loading bio...</p>
+                    </div>
 
-                    </p>
-                </div>
+                    
+                    <button id="reload-icon">&#x21bb;</button>
+
+                </div> -->
+              </div>
+
             </div>
             
         </div>
 
 
 
-        <button class="herobtn">
-          <span class="circle" aria-hidden="true">
-            <span class="icon arrow"></span>
-          </span>
-          <span class="button-text">Next Page</span>
-        </button>
+        
 
 
 
@@ -120,9 +121,16 @@
             </div>
 
 
-            <div class="roundedButton" style="overflow: hidden; margin: 1rem;" onMouseEnter="manageMouseEnter()" onMouseLeave="manageMouseLeave()">
+            <!-- <div class="roundedButton" style="overflow: hidden; margin: 1rem;" onMouseEnter="manageMouseEnter()" onMouseLeave="manageMouseLeave()">
               <p>Check More</p>
               <div class="circle"></div>
+            </div> -->
+
+            <div class="abutton">
+              <div class="acontent">
+                <i class="bx bx-cloud-download"></i>
+                <span class="abutton-text">Download</span>
+              </div>
             </div>
 
               
@@ -172,14 +180,23 @@
                   <h1 class="proclass">2. Uber</h1>
                 </div>
               </div>
-              <div class="card">
-                <img  id="img5" src="./assets/projects/05.jpg" alt="" />
-                <div class="copy">
-                  <h1 class="proclass">1. Netflix</h1>
-                </div>
-              </div>
+
+              <a href="contact.html">
+
+                    <div class="card">
+                        <img  id="img5" src="./assets/projects/05.jpg" alt="" />
+                      <div class="copy">
+                      
+                        <h1 class="proclass">1. Netflix</h1>
+                      </div>
+                    </div>
+              </a>
             </div>
           </div>
+
+            <!-- Left and Right Arrow Icons -->
+    <div class="arrow left-arrow" style="padding:0 2rem;">&larr; <p style="cursor: pointer;">left arrow</p></div>
+    <div class="arrow right-arrow " style="padding: 2rem;">&rarr; <p style="cursor: pointer;">right arrow</p></div>
 
 
 

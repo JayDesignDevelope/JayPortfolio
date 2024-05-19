@@ -1,10 +1,12 @@
 const data = [
     {
-      itemName: "Nanotech Fabrics",
+      itemName: "Introduction to UnsupervisedLearning in Bioinformatics",
       itemCategory: "Eco-Futurism Line",
-      itemLink: "https://www.youtube.com/@codegrid",
+      itemLink: "https://onlinelibrary.wiley.com/doi/10.1002/9781119785620.ch2",
       itemCopy:
-        "The world of textiles has witnessed a revolution with the introduction of Advanced Nanotech Fabrics. Engineered on a micro-level, these fabrics promise to deliver both fashion and functionality in a single weave. Imagine a world where your dress naturally repels stains, or where your suit cleans itself. Beyond aesthetic appeal, it's the dawn of apparel that truly works for you.",
+    `
+    Unsupervised learning algorithmic techniques are applied in grouping the data depending upon similar attributes, most similar patterns, or relationships amongst the dataset points or values. These Machine learning models are also referred to as self-organizing models which operate on clustering technique. Distinct approaches are employed on every other algorithm in splitting up data into clusters. Unsupervised machine learning uncovers previously unknown patterns in data.
+    `,
       itemImg: "./assets/research/img-1.jpg",
     },
     {

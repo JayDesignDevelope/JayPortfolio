@@ -53,26 +53,25 @@ function isItem(target) {
 
 
 //Projects--------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  splitTextIntoSpans(".copy h1");
+  initializeCards();
+  gsap.set("h1 span", { y: -200 });
+  gsap.set(".slider .card:last-child h1 span", { y: 0 });
+});
+
 CustomEase.create("cubic", "0.83, 0, 0.17, 1");
 let isAnimating = false;
+let cardIndex = 0;
 
 function splitTextIntoSpans(selector) {
-  let elements = document.querySelectorAll(selector);
-  elements.forEach((element) => {
-    let text = element.innerText;
-    let splitText = text
-      .split("")
-      .map(function (char) {
-        return `<span>${char === " " ? "&nbsp;&nbsp;" : char}</span>`;
-      })
-      .join("");
-    element.innerHTML = splitText;
+  document.querySelectorAll(selector).forEach(element => {
+    element.innerHTML = element.innerText.split("").map(char => `<span>${char === " " ? "&nbsp;" : char}</span>`).join("");
   });
 }
 
 function initializeCards() {
-  let cards = Array.from(document.querySelectorAll(".card"));
-  gsap.to(cards, {
+  gsap.to(".card", {
     y: (i) => -15 + 15 * i + "%",
     z: (i) => 15 * i,
     opacity: 1,
@@ -82,78 +81,140 @@ function initializeCards() {
   });
 }
 
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  splitTextIntoSpans(".copy h1");
-  initializeCards();
-  gsap.set("h1 span", { y: -200 });
-  gsap.set(".slider .card:last-child h1 span", { y: 0 });
+document.addEventListener("keydown", function(event) {
+  if (isAnimating) return;
+  
+  const key = event.key;
+  if (key === "ArrowLeft") {
+    navigateCards("previous");
+  } else if (key === "ArrowRight") {
+    navigateCards("next");
+  }
 });
 
+function navigateCards(direction) {
+  isAnimating = true;
 
+  const slider = document.querySelector(".slider");
+  const cards = Array.from(slider.querySelectorAll(".card"));
+  const lastCard = cards.pop();
+  const nextCard = cards[direction === "next" ? 0 : cards.length - 1];
 
-
-
-//•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••
-let cardIndex =0
-
-document.addEventListener("scroll", function () {
-    if (isAnimating) return;
-    isAnimating = true;
-  
-    let slider = document.querySelector(".slider");
-    let cards = Array.from(slider.querySelectorAll(".card"));
-    let lastCard = cards.pop();
-    let nextCard = cards[cards.length - 1];
-  
-    gsap.to(lastCard.querySelectorAll("h1 span"), {
-      y: 200,
-      duration: 0.75,
-      ease: "cubic",
-    });
-  
-    gsap.to(lastCard, {
-      y: "+=150%",
-      duration: 0.75,
-      ease: "cubic",
-      onComplete: () => {
+  gsap.to(lastCard.querySelectorAll("h1 span"), { y: 200, duration: 0.75, ease: "cubic" });
+  gsap.to(lastCard, {
+    y: direction === "next" ? "+=150%" : "-=150%",
+    duration: 0.75,
+    ease: "cubic",
+    onComplete: () => {
+      if (direction === "next") {
         slider.prepend(lastCard);
-        initializeCards();
-        gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
-  
-        setTimeout(() => {
-          isAnimating = false;
-        }, 1000);
-      },
-    });
-  
-    gsap.to(nextCard.querySelectorAll("h1 span"), {
-      y: 0,
-      duration: 1,
-      ease: "cubic",
-      stagger: 0.05,
-    });
-  
-    // Define an array of colors to cycle through
-    let colors = ["","#B33B08", "#979662", "#B5BFBB"];
-    
-    // Set background color based on the index of the card
-    let procontainer = document.getElementById("procontainer"); // Replace "procontainer" with the ID of your div
-    cardIndex =cardIndex+1
-    procontainer.style.backgroundColor = colors[cardIndex];
+      } else {
+        slider.appendChild(lastCard);
+      }
+      initializeCards();
+      gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
+
+      setTimeout(() => isAnimating = false, 1000);
+    },
   });
-  
-  
+  gsap.to(nextCard.querySelectorAll("h1 span"), { y: 0, duration: 1, ease: "cubic", stagger: 0.05 });
+
+  const colors = ["", "#B33B08", "#979662", "#B5BFBB"];
+  document.getElementById("procontainer").style.backgroundColor = colors[direction === "next" ? ++cardIndex % colors.length : --cardIndex % colors.length];
+}
 
 
-  /* Sidebar in Hero for nav */
+
+
+
+
+
+
+
+
+
+
+function redirectToIndex() {
+  // Add smooth transition effect
+  document.querySelector('.procontainer').style.transition = 'opacity 0.5s';
+  document.querySelector('.procontainer').style.opacity = '0';
+
+  // Redirect after the transition
+  setTimeout(function() {
+    window.location.href = './index.html';
+  }, 500); // 500 milliseconds (0.5s) transition time
+}
+
+
+
+  /* Sidebar in Hero for nav----------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".wrapper");
     const sidebar = document.querySelector(".herosidebar");
     const cards = gsap.utils.toArray(".herocard");
     const overlayToggle = document.querySelector(".overlay-toggle");
+
+
+  //button download resume 
+  const abutton = document.querySelector(".abutton");
+    abutton.addEventListener("click", () =>{
+      abutton.classList.add("active");
+      setTimeout(()=>{
+        abutton.classList.remove("active");
+        abutton.querySelector("i").classList.replace("bx-cloud-download", "bx-check-circle")
+        abutton.querySelector("span").innerText = "Completed";
+
+        // Create a link element
+        const link = document.createElement('a');
+        link.href = 'https://drive.google.com/file/d/1lgTul5YHOFnB1mWJ3vsmO-0sRsOS67_L/view?usp=sharing'; // Update with the correct path to your PDF
+        
+        link.target = '_blank'; // Open in a new tab
+
+
+link.dispatchEvent(new MouseEvent('click'));
+      },2000);
+    });
+
+
+    //typrwriter effect 
+    const dynamicText = document.querySelector("h1 span");
+    const words = [" Designer", " Engineer", " Developer", " Reseacher"];
+    // Variables to track the position and deletion status of the word
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    const typeEffect = () => {
+        const currentWord = words[wordIndex];
+        const currentChar = currentWord.substring(0, charIndex);
+        dynamicText.textContent = currentChar;
+        dynamicText.classList.add("<br>")
+        dynamicText.classList.add("stop-blinking");
+        if (!isDeleting && charIndex < currentWord.length) {
+            // If condition is true, type the next character
+            charIndex++;
+            setTimeout(typeEffect, 200);
+        } else if (isDeleting && charIndex > 0) {
+            // If condition is true, remove the previous character
+            charIndex--;
+            setTimeout(typeEffect, 100);
+        } else {
+            // If word is deleted then switch to the next word
+            isDeleting = !isDeleting;
+            dynamicText.classList.remove("stop-blinking");
+            wordIndex = !isDeleting ? (wordIndex + 1) % words.length : wordIndex;
+            setTimeout(typeEffect, 1200);
+        }
+    }
+    typeEffect();
+
+
+
+
+
+
+
+
+
 
     function animateCardsIn() {
       gsap.to(overlayToggle, {
@@ -227,28 +288,28 @@ document.addEventListener("scroll", function () {
 // Hero txt
 
 
-const tlhero = gsap.timeline();
+// const tlhero = gsap.timeline();
 
-tlhero.from('.left-side div',{
-  y:150,
-  opacity:0,
-  stagger:{
-    amount:.4
-  },
-  delay:.5
-})
+// tlhero.from('.left-side div',{
+//   y:150,
+//   opacity:0,
+//   stagger:{
+//     amount:.4
+//   },
+//   delay:.5
+// })
 
 
 
-ScrollTrigger.create({
-  animation:tlhero,
-  trigger:'.wrapper',
-  start:"top top",
-  end:"+=600",
-  scrub:1,
-  pin:true,
-  ease:"ease"
-})
+// ScrollTrigger.create({
+//   animation:tlhero,
+//   trigger:'.wrapper',
+//   start:"top top",
+//   end:"+=600",
+//   scrub:1,
+//   pin:true,
+//   ease:"ease"
+// })
 
 
 
@@ -325,3 +386,35 @@ gsap.to(".wheel", {
     window.location.href = "/about.html";
 
   }
+
+
+
+
+
+
+  //regenrative js hero
+  document.addEventListener("DOMContentLoaded", function() {
+    // Function to load bio content from bio.txt file
+    function loadBio() {
+      fetch('bio.txt')
+        .then(response => response.text())
+        .then(data => {
+          // Update the bio container with the content from bio.txt
+          document.getElementById('bio-container').innerHTML = data;
+        })
+        .catch(error => {
+          console.error('Error fetching bio:', error);
+          document.getElementById('bio-container').innerHTML = '<p>Error loading bio. Please try again later.</p>';
+        });
+    }
+  
+    // Load bio content initially
+    loadBio();
+  
+    // Reload bio content when reload icon is clicked
+    document.getElementById('reload-icon').addEventListener('click', function() {
+      loadBio();
+    });
+  });
+
+
