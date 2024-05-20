@@ -6,6 +6,8 @@
     <title>Jay Portfolio</title>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
 
     <link rel="stylesheet" href="index.css" />
   </head>
@@ -148,21 +150,19 @@
             <p>2024 / 2025</p>
           </footer>
           <div id ="procontainer" class="procontainer">
-            <!-- <h1 class="title">Netflix</h1> -->
-            <div class="header-revealer"></div>
-            <!-- <div class="article-text" >
-              <p style="width: 100%;">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                  repudiandae ullam aspernatur eveniet molestias architecto
-                  labore facere delectus, impedit reiciendis quod dolore?
-                  Exercitationem accusantium inventore eos ea commodi quis in
-                  voluptatum voluptates corrupti ipsum obcaecati eveniet
-                  voluptate, quisquam est distinctio?
-              </p>
-            </div> -->
+
+            <div  class="link--arrowedright">
+              <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 32 32">
+                <g fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                  <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                  <path class="arrow-icon--arrow" d="M16.14 9.93L22.21 16l-6.07 6.07M8.23 16h13.98"></path>
+                </g>
+              </svg>
+            </div>
+            
+            
             <div class="slider">
-              
-              <div class="card" onclick="redirectToAbout()">
+              <div class="card">
                 <img  id="img2" src="./assets/projects/02.jpg" alt="" />
                 <div class="copy">
                   <h1 class="proclass">4. Silent Horizon</h1>
@@ -181,7 +181,7 @@
                 </div>
               </div>
 
-              <a href="contact.html">
+              
 
                     <div class="card">
                         <img  id="img5" src="./assets/projects/05.jpg" alt="" />
@@ -190,14 +190,23 @@
                         <h1 class="proclass">1. Netflix</h1>
                       </div>
                     </div>
-              </a>
+              
             </div>
+
+            <div  class="link--arrowedleft">
+              <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" width="62" height="62" viewBox="0 0 32 32">
+                <g fill="none" stroke="#000" stroke-width="1.5" stroke-linejoin="round" stroke-miterlimit="10">
+                  <circle class="arrow-icon--circle" cx="16" cy="16" r="15.12"></circle>
+                  <path class="arrow-icon--arrow" d="M15.86 22.07L9.79 16l6.07-6.07M23.77 16H9.79"></path>
+                </g>
+              </svg>
+              
+            </div>
+
+           
           </div>
 
-            <!-- Left and Right Arrow Icons -->
-    <div class="arrow left-arrow" style="padding:0 2rem;">&larr; <p style="cursor: pointer;">left arrow</p></div>
-    <div class="arrow right-arrow " style="padding: 2rem;">&rarr; <p style="cursor: pointer;">right arrow</p></div>
-
+            
 
 
 
@@ -343,6 +352,7 @@
     <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll/dist/locomotive-scroll.min.js"></script>
     <script src="https://unpkg.com/@barba/core"></script>
     <script src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/kursor@0.0.14/dist/kursor.js"></script>
 
 <!-- 
     <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>

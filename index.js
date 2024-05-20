@@ -1,3 +1,9 @@
+new kursor({
+  type: 4,
+  removeDefaultCursor: true
+
+})
+
 
 // Reserch
 import { data } from "./data.js";
@@ -60,18 +66,29 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.set(".slider .card:last-child h1 span", { y: 0 });
 });
 
+
+
+
 CustomEase.create("cubic", "0.83, 0, 0.17, 1");
 let isAnimating = false;
-let cardIndex = 0;
+const colors = ["#dfe1c8", "#f0a5a5", "#a5f0e0", "#c8a5f0", "#a5c8f0","#87947D"]; // List of 5 colors
+let currentIndex = 0;
 
 function splitTextIntoSpans(selector) {
-  document.querySelectorAll(selector).forEach(element => {
-    element.innerHTML = element.innerText.split("").map(char => `<span>${char === " " ? "&nbsp;" : char}</span>`).join("");
+  let elements = document.querySelectorAll(selector);
+  elements.forEach((element) => {
+    let text = element.innerText;
+    let splitText = text
+      .split("")
+      .map((char) => `<span>${char === " " ? "&nbsp;&nbsp;" : char}</span>`)
+      .join("");
+    element.innerHTML = splitText;
   });
 }
 
 function initializeCards() {
-  gsap.to(".card", {
+  let cards = Array.from(document.querySelectorAll(".card"));
+  gsap.to(cards, {
     y: (i) => -15 + 15 * i + "%",
     z: (i) => 15 * i,
     opacity: 1,
@@ -81,47 +98,170 @@ function initializeCards() {
   });
 }
 
-document.addEventListener("keydown", function(event) {
-  if (isAnimating) return;
-  
-  const key = event.key;
-  if (key === "ArrowLeft") {
-    navigateCards("previous");
-  } else if (key === "ArrowRight") {
-    navigateCards("next");
-  }
-});
 
-function navigateCards(direction) {
+function changeContainerColor() {
+  const container = document.querySelector(".procontainer");
+  container.style.backgroundColor = colors[currentIndex];
+}
+
+function goToNextCard() {
+  if (isAnimating) return;
   isAnimating = true;
 
-  const slider = document.querySelector(".slider");
-  const cards = Array.from(slider.querySelectorAll(".card"));
-  const lastCard = cards.pop();
-  const nextCard = cards[direction === "next" ? 0 : cards.length - 1];
+  let slider = document.querySelector(".slider");
+  let cards = Array.from(slider.querySelectorAll(".card"));
+  let lastCard = cards.pop();
+  let nextCard = cards[cards.length - 1];
 
-  gsap.to(lastCard.querySelectorAll("h1 span"), { y: 200, duration: 0.75, ease: "cubic" });
+  currentIndex = (currentIndex + 1) % colors.length;
+  changeContainerColor();
+
+  gsap.to(lastCard.querySelectorAll("h1 span"), {
+    y: 200,
+    duration: 0.75,
+    ease: "cubic",
+  });
+
   gsap.to(lastCard, {
-    y: direction === "next" ? "+=150%" : "-=150%",
+    y: "+=150%",
     duration: 0.75,
     ease: "cubic",
     onComplete: () => {
-      if (direction === "next") {
-        slider.prepend(lastCard);
-      } else {
-        slider.appendChild(lastCard);
-      }
+      slider.prepend(lastCard);
       initializeCards();
       gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
 
-      setTimeout(() => isAnimating = false, 1000);
+      setTimeout(() => {
+        isAnimating = false;
+      }, 1000);
     },
   });
-  gsap.to(nextCard.querySelectorAll("h1 span"), { y: 0, duration: 1, ease: "cubic", stagger: 0.05 });
 
-  const colors = ["", "#B33B08", "#979662", "#B5BFBB"];
-  document.getElementById("procontainer").style.backgroundColor = colors[direction === "next" ? ++cardIndex % colors.length : --cardIndex % colors.length];
+  gsap.to(nextCard.querySelectorAll("h1 span"), {
+    y: 0,
+    duration: 1,
+    ease: "cubic",
+    stagger: 0.05,
+  });
+
 }
+
+function goToPrevCard() {
+  if (isAnimating) return;
+  isAnimating = true;
+
+  let slider = document.querySelector(".slider");
+  let cards = Array.from(slider.querySelectorAll(".card"));
+  let firstCard = cards.shift();
+  let prevCard = cards[0];
+
+  currentIndex = (currentIndex + 1) % colors.length;
+  changeContainerColor();
+
+  gsap.to(prevCard.querySelectorAll("h1 span"), {
+    y: -200,
+    duration: 0.75,
+    ease: "cubic",
+  });
+
+  gsap.to(firstCard, {
+    y: "-=150%",
+    duration: 0.75,
+    ease: "cubic",
+    onComplete: () => {
+      slider.append(firstCard);
+      initializeCards();
+      gsap.set(firstCard.querySelectorAll("h1 span"), { y: 200 });
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 1000);
+    },
+  });
+
+  gsap.to(firstCard.querySelectorAll("h1 span"), {
+    y: 0,
+    duration: 1,
+    ease: "cubic",
+    stagger: 0.05,
+  });
+}
+
+function addCardClickHandler() {
+  document.querySelectorAll(".card").forEach((card) => {
+    card.addEventListener("click", function () {
+      // if (card.querySelector("h1").innerText === "Ethereal Noir") {
+        animateAndRedirect(card);
+      //}
+    });
+  });
+}
+
+function animateAndRedirect(card) {
+  gsap.to(card, {
+    scale: 1.2,
+    zIndex: 10,
+    y: "-50%",
+    duration: 0.75,
+    ease: "cubic",
+    onComplete: () => {
+      gsap.to(card, {
+        scale: 5,
+        width: "100vw",
+        height: "100vh",
+        duration: 0.75,
+        ease: "cubic",
+        onComplete: () => {
+          window.location.href = "netflix.html";
+        }
+      });
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  splitTextIntoSpans(".copy h1");
+  initializeCards();
+  gsap.set("h1 span", { y: -200 });
+  gsap.set(".slider .card:last-child h1 span", { y: 0 });
+
+  document.querySelector(".link--arrowedright").addEventListener("click", goToNextCard);
+  document.querySelector(".link--arrowedleft").addEventListener("click", goToPrevCard);
+
+  addCardClickHandler();
+
+});
+
+// function navigateCards(direction) {
+//   isAnimating = true;
+
+//   const slider = document.querySelector(".slider");
+//   const cards = Array.from(slider.querySelectorAll(".card"));
+//   const lastCard = cards.pop();
+//   const nextCard = cards[direction === "next" ? 0 : cards.length - 1];
+
+//   gsap.to(lastCard.querySelectorAll("h1 span"), { y: 200, duration: 0.75, ease: "cubic" });
+//   gsap.to(lastCard, {
+//     y: direction === "next" ? "+=150%" : "-=150%",
+//     duration: 0.75,
+//     ease: "cubic",
+//     onComplete: () => {
+//       if (direction === "next") {
+//         slider.prepend(lastCard);
+//       } else {
+//         slider.appendChild(lastCard);
+//       }
+//       initializeCards();
+//       gsap.set(lastCard.querySelectorAll("h1 span"), { y: -200 });
+
+//       setTimeout(() => isAnimating = false, 1000);
+//     },
+//   });
+//   gsap.to(nextCard.querySelectorAll("h1 span"), { y: 0, duration: 1, ease: "cubic", stagger: 0.05 });
+
+//   const colors = ["", "#B33B08", "#979662", "#B5BFBB"];
+//   document.getElementById("procontainer").style.backgroundColor = colors[direction === "next" ? ++cardIndex % colors.length : --cardIndex % colors.length];
+// }
 
 
 
@@ -374,18 +514,6 @@ gsap.to(".wheel", {
   
 
 
-
-  // rediecting to projects
-  function redirectToAbout() {
-    // Redirect to the about.html page
-    window.location.href = "about.html";
-  }
-
-
-  document.querySelector('.card').onclick=function(){
-    window.location.href = "/about.html";
-
-  }
 
 
 

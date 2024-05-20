@@ -1,43 +1,42 @@
-var s1=function(sketch){
+var s1 = function (sketch) {
 
-    let engine;
-    let words = [];
-    let ground, wallLeft, wallRight;
-    let wordsToDisplay = [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "Python",
-      "Tensorflow",
-      "NodeJs",
-      "Java",
-      "Email",
-      "AWS",
-      "Plotly",
-      "SQL",
-      "GSAP",
-      "Angular",
-      "React",
-      "Figma",
-      "MongoDB",
-      "Tableau",
-      "Machine Learning",
-      "GraphQL",
-  
-    ];
+  let engine;
+  let words = [];
+  let ground, wallLeft, wallRight;
+  let wordsToDisplay = [
+      { text: "HTML", url: "https://www.w3schools.com/html/" },
+      { text: "CSS", url: "https://www.w3schools.com/css/" },
+      { text: "JavaScript", url: "https://www.javascript.com/" },
+      { text: "Python", url: "https://www.python.org/" },
+      { text: "Tensorflow", url: "https://www.tensorflow.org/" },
+      { text: "NodeJs", url: "https://nodejs.org/" },
+      { text: "Java", url: "https://www.java.com/" },
+      { text: "Email", url: "mailto:example@example.com" },
+      { text: "AWS", url: "https://aws.amazon.com/" },
+      { text: "Plotly", url: "https://plotly.com/" },
+      { text: "SQL", url: "https://www.w3schools.com/sql/" },
+      { text: "GSAP", url: "https://greensock.com/gsap/" },
+      { text: "Angular", url: "https://angular.io/" },
+      { text: "React", url: "https://reactjs.org/" },
+      { text: "Figma", url: "https://www.figma.com/" },
+      { text: "MongoDB", url: "https://www.mongodb.com/" },
+      { text: "Tableau", url: "https://www.tableau.com/" },
+      { text: "Machine Learning", url: "https://www.coursera.org/learn/machine-learning" },
+      { text: "GraphQL", url: "https://graphql.org/" }
+  ];
 
-
-    class Word {
-        constructor(x, y, word) {
+  class Word {
+      constructor(x, y, word, url) {
           this.body = Matter.Bodies.rectangle(x, y, word.length * 20, 40);
           this.word = word;
+          this.url = url;
           Matter.World.add(engine.world, this.body);
-        }
-      
-        show() {
+      }
+
+      show() {
           let pos = this.body.position;
           let angle = this.body.angle;
-      
+
           sketch.push();
           sketch.translate(pos.x, pos.y);
           sketch.rotate(angle);
@@ -52,62 +51,66 @@ var s1=function(sketch){
           sketch.textAlign(CENTER, CENTER);
           sketch.text(this.word, 0, 0);
           sketch.pop();
-        }
-}
+      }
 
-    sketch.setup=function(){
-        let canvas1=sketch.createCanvas(600,700);
-        canvas1.parent("canvas_container")
+      contains(x, y) {
+          const bounds = this.body.bounds;
+          return (x > bounds.min.x && x < bounds.max.x && y > bounds.min.y && y < bounds.max.y);
+      }
+  }
 
-        engine=Matter.Engine.create();
-        ground = Matter.Bodies.rectangle(sketch.width / 2, sketch.height - 20, sketch.width, 10, {
-            isStatic: true,
-        });
-        wallLeft = Matter.Bodies.rectangle(0, sketch.height / 2, 10, sketch.height, {
-            isStatic: true,
-        });
-        wallRight = Matter.Bodies.rectangle(sketch.width, sketch.height / 2, 10, sketch.height, {
-            isStatic: true,
-        });
+  sketch.setup = function () {
+      let canvas1 = sketch.createCanvas(600, 700);
+      canvas1.parent("canvas_container");
 
-        Matter.World.add(engine.world, [ground, wallLeft, wallRight]);
+      engine = Matter.Engine.create();
+      ground = Matter.Bodies.rectangle(sketch.width / 2, sketch.height - 20, sketch.width, 10, {
+          isStatic: true,
+      });
+      wallLeft = Matter.Bodies.rectangle(0, sketch.height / 2, 10, sketch.height, {
+          isStatic: true,
+      });
+      wallRight = Matter.Bodies.rectangle(sketch.width, sketch.height / 2, 10, sketch.height, {
+          isStatic: true,
+      });
 
-        for (let i = 0; i < wordsToDisplay.length; i++) {
-            words.push(new Word(sketch.random(width), -200, wordsToDisplay[i]));
-        }
-    };
-    
-    sketch.draw = function () {
-        //for canvas 1
-        sketch.background("#606060");
-        Matter.Engine.update(engine);
-        for(let word of words){
-            word.show();
-        }
-    };
+      Matter.World.add(engine.world, [ground, wallLeft, wallRight]);
 
-sketch.mouseMoved=function() {
-    for (let word of words) {
-        if (
-        sketch.dist(sketch.mouseX, sketch.mouseY, word.body.position.x, word.body.position.y) <
-        50
-        ) {
-        Matter.Body.applyForce(
-            word.body,
-            { x: word.body.position.x, y: word.body.position.y },
-            { x: sketch.random(-0.2, 0.2), y: sketch.random(-0.2, 0.2) }
-        );
-        }
-    }
-    }
+      for (let i = 0; i < wordsToDisplay.length; i++) {
+          words.push(new Word(sketch.random(sketch.width), -200, wordsToDisplay[i].text, wordsToDisplay[i].url));
+      }
+  };
 
+  sketch.draw = function () {
+      sketch.background("#606060");
+      Matter.Engine.update(engine);
+      for (let word of words) {
+          word.show();
+      }
+  };
 
+  sketch.mouseMoved = function () {
+      for (let word of words) {
+          if (sketch.dist(sketch.mouseX, sketch.mouseY, word.body.position.x, word.body.position.y) < 50) {
+              Matter.Body.applyForce(
+                  word.body,
+                  { x: word.body.position.x, y: word.body.position.y },
+                  { x: sketch.random(-0.2, 0.2), y: sketch.random(-0.2, 0.2) }
+              );
+          }
+      }
+  };
 
-    
-}
-
-
-
+  sketch.mousePressed = function () {
+      for (let word of words) {
+          if (word.contains(sketch.mouseX, sketch.mouseY)) {
+              if (word.url) {
+                  window.open(word.url, '_blank');
+              }
+          }
+      }
+  };
+};
 
 
 
