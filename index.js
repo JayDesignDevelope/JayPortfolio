@@ -1,8 +1,47 @@
-new kursor({
-  type: 4,
-  removeDefaultCursor: true
+//lenis scroll trigger for text reveal effect
 
+gsap.registerPlugin(ScrollTrigger)
+
+const splitTypes = document.querySelectorAll('.reveal-type')
+
+splitTypes.forEach((char,i) => {
+
+    const bg = char.dataset.bgColor
+    const fg = char.dataset.fgColor
+
+    const text = new SplitType(char, { types: 'chars'})
+
+    gsap.from(text.chars, {
+            scrollTrigger:{
+                trigger:char,
+                start:'top 90%',
+                end:'end 10%',
+                scrub:true,
+                markers:false
+            },
+            opacity:0.2,
+            stagger:0.1
+        })
 })
+
+
+const lenis = new Lenis()
+
+lenis.on('scroll', (e) => {
+console.log(e)
+})
+
+function raf(time) {
+lenis.raf(time)
+requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf)
+
+
+
+
+
 
 
 // Reserch
@@ -310,7 +349,7 @@ function redirectToIndex() {
         
         link.target = '_blank'; // Open in a new tab
 
-
+        link.rel="noopener noreferrer";
 link.dispatchEvent(new MouseEvent('click'));
       },2000);
     });

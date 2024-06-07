@@ -1,3 +1,35 @@
+@font-face {
+  font-family: 'samsung_med';
+  src: url('assets/font/samsungsharpsans-medium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'samsung_bold';
+  src: url('assets/font/samsungsharpsans-bold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'samsung_lit';
+  src: url('assets/font/samsungsharpsans.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'uber_bold';
+  src: url('assets/font/UberMoveBold.otf') format('opentype');
+}
+@font-face {
+  font-family: 'uber_med';
+  src: url('assets/font/UberMoveMedium.otf') format('opentype');
+}
+@font-face {
+  font-family: 'uber_reg';
+  src: url('assets/font/UberMoveTextRegular.otf') format('opentype');
+}
+@font-face {
+  font-family: 'uber_lit';
+  src: url('assets/font/UberMoveTextLight.otf') format('opentype');
+}
+
+
+
 * {
     margin: 0;
     padding: 0;
@@ -13,7 +45,6 @@
   body {
     color: #ffffff;
     font-family: "Neue Montreal", sans-serif;
-    height: 100vh;
     background: #ffffff;
   }
   
@@ -564,6 +595,7 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
     border: solid 1px black;
   
   }
+
   
   .certificates {
     padding: 2em 2.5em;
@@ -571,7 +603,8 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
     display:flex;
     position: relative;
     flex-direction: column;
-  
+    margin: 1rem 0;
+
     width: 100%;
     height: auto;
     border: solid 1px black;
@@ -580,18 +613,40 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   
   .scrible {
     border-radius: 8px;
+    margin: 1rem 0;
 
     display:flex;
     position: relative;
     flex-direction: column;
   background-color: #000000;
     width: 100%;
-    height: auto;
+    height: 100vh;
     border: solid 1px black;
   
   }
+
+  .jaygpt {
+    border-radius: 8px;
+    margin: 1rem 0;
+    color: #000;
+    display:flex;
+    position: relative;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100vh;
+    border: solid 1px black;
   
-  .about p,
+  }
+  .jaygpt h1{
+    position: absolute;
+    top: 0;
+  }
+  
+  .about p{
+    width: auto;
+    font-size: 1.5rem;
+  }
   .projects p,
   .research p,
   .certificates p,
@@ -624,15 +679,15 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   .roundedButton {
     margin-top: 2rem;
 
-    width: 200px;
+    width: 600px;
     border-radius: 3em;
     border: 1px solid rgb(136, 136, 136);
-    cursor: pointer;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px 10px 10px 10px;
+    padding: 5px;
+    margin: 1rem 0;
   }
   
   .roundedButton p {
@@ -664,32 +719,10 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   
   .article-text{
     margin: 1rem;
+    padding: 1rem 0;
   }
   
   
-
-  .magnetic-button {
-    padding: 4px 7px;
-    margin: 1rem 0 0 2rem ;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    background-color: transparent;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    position: relative;
-}
-
-.magnetic-button:hover {
-    transform: translate(-5%, -5%);
-    -webkit-transform: translate(-5%, -5%);
-    -moz-transform: translate(-5%, -5%);
-    -ms-transform: translate(-5%, -5%);
-    -o-transform: translate(-5%, -5%);
-}
-
-
 
 
 /* Research  */
@@ -709,14 +742,14 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 
 .items {
   position: absolute;
-  width: 50%;
+  width: 52%;
   display: flex;
   flex-direction: column;
 }
 
 .item {
   display: flex;
-  padding: 1rem 0.5em;
+  padding: 1rem 1em;
   cursor: pointer;
 }
 
@@ -730,16 +763,18 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
 }
 
 .item-year {
-  flex: 1;
+  padding-top: 1em;
+  flex: 2;
 }
 
 .overlay {
   position: absolute;
   bottom: -1200px;
   right: 0;
-  width: 50%;
-  height: 700px;
+  width: 45%;
+  height: 650px;
   padding: 2em;
+  margin: 0 0.5em 0 2em;
   background: #fff;
   color: #000;
   overflow-x: hidden;
@@ -770,20 +805,19 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 2em 0;
+  padding: 1em 0;
 }
 
 .col:nth-child(1) {
   flex: 3;
 }
 
-.col:nth-child(2) {
-  flex: 2;
-}
+
 
 #close-btn {
   cursor: pointer;
   opacity: 0.4;
+  align-items: end;
 }
 
 .item-details {
@@ -984,14 +1018,122 @@ img {
   stroke-dashoffset: 95;
 }
 .link--arrowedright:hover .arrow-icon {
-  -webkit-transform: translate3d(5px, 0, 0);
+          -webkit-transform: translate3d(5px, 0, 0);
           transform: translate3d(5px, 0, 0);
+          -moz-transform: translate3d(5px, 0, 0);
+          -ms-transform: translate3d(5px, 0, 0);
+          -o-transform: translate3d(5px, 0, 0);
 }
 .link--arrowedright:hover .arrow-icon--circle {
   stroke-dashoffset: 0;
 }
 
+/* About */
+.about_container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: normal;
+  align-items: normal;
+  align-content: normal;
+  color: #000;
+  font-family:  sans-serif;
 
+}
+
+.about-items:nth-child(1) {
+  width: 100%;
+  height: 200px;
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: center;
+  padding: 2rem;
+  order: 0;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+.about-items b{
+  font-family: "uber_bold";
+  
+}
+
+
+
+.about-items:nth-child(2) {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: normal;
+  align-items: normal;
+  align-content: normal;
+  color: #000;
+  font-family:  "uber_reg";
+
+
+}
+.about-items-2:nth-child(1) {
+  display: block;
+  width: 100%;
+  height: 500px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  order: 0;
+}
+.about-items-2:nth-child(2) {
+  display: block;
+  width: 100%;
+  height: 500px;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: center;
+  padding: 2rem;
+  order: 0;
+}
+
+
+.about-items:nth-child(3) {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: normal;
+  align-items: normal;
+  align-content: normal;
+  color: #000;
+  font-family:  "uber_reg";
+}
+
+.about-items-3:nth-child(1) {
+  display: block;
+  width: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: center;
+  padding: 2rem;
+  font-size: 1.5rem;
+  overflow-wrap: anywhere;
+  order: 0;
+}
+.about-items-3:nth-child(2) {
+  display: block;
+  width: 100%;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: center;
+  padding: 2rem;
+  order: 0;
+}
 
 /* about button downlaod resume  */
 .abutton{
@@ -1214,26 +1356,239 @@ align-items: center;  color: #000;
   overflow: hidden;
 }
 
-
-.certcanvas_container {
-  width: 400px; /* Set width as per your requirement */
-  height: 400px; /* Set height as per your requirement */
+.canvas-container {
+  width: 804px; /* Set width as per your requirement */
+  height: 300px; /* Set height as per your requirement */
+  background-color: #ccc; /* Example background color */
+  margin-left: auto; /* Pushes the canvas-container to the right */
   margin-top: 1px; /* Adjust margin as needed */
   border: #000 2px solid;
   display: flex;
-  overflow: hidden;
+}
+#canvas_container{
+  background-color: #ffffff;
+  width: 100%;
+  align-items: end;
+  border: #000 2px solid;
+  height: 100%;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
 
 
 
-.certcontainercanvas {
+.containercanvas {
   display: flex;
-  width: auto;
-  background-color: #000;
-  overflow: hidden;
-  height: 800px;
-  border: #a92828 1px solid;
-  justify-content: center;
+  margin-left: auto; /* This will push the .containercanvas div to the right */
+  border: #000 1px solid;
+  justify-content: flex-end;
   align-items: center;
+  height: 100%;
   }
+
+
+
+
+  /* jaygpt */
+  .jaygptheader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } 
+
+  .jaygpt_container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+ .jaygptheader h1 {
+  font-family: "Circular Std", sans-serif;
+  font-size: 12vw;
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 175%;
+  margin: 0 2rem;
+  color: #000000;
+  text-align: center;
+
+} 
+.jaygptheader h3 {
+  width: 1000px;
+  font-family: "Circular Std", sans-serif;
+  font-size: 2vw;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+
+} 
+
+  .absolute {
+    position: absolute;
+    top: 50px !important;
+    inset: 0;
+    justify-content: center;
+    display: inline-flex;
+    flex-direction: row;
+  }
+  .bg-shape1 {
+    width: 400px;
+    height: 400px;
+    border-radius: 9999px;
+    position: relative;
+    animation: one 10s infinite;
+  }
+  
+  .bg-shape2 {
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    position: relative;
+    animation: two 10s infinite ;
+}
+
+
+
+  @keyframes one {
+    0% {
+      left: 0px;
+      top: 0px;
+    }
+    25% {
+      left: -100px;
+      top: 70px;
+    }
+    50% {
+      left: 20px;
+      top: 150px;
+    }
+    75% {
+      left: 50px;
+      top: 100px;
+    }
+    100% {
+      left: 0px;
+      top: 0px;
+    }
+  }
+  @keyframes two {
+    0% {
+      left: 0px;
+      top: 0px;
+    }
+    25% {
+      left: 50px;
+      top: 10px;
+    }
+    50% {
+      left: 100px;
+      top: 50px;
+    }
+    75% {
+      left: 50px;
+      top: 100px;
+    }
+    100% {
+      left: 0px;
+      top: 0px;
+    }
+  }
+
+  /* Background shape styles */
+  .bg-shape1 {
+    width: 400px;
+    height: 400px;
+    border-radius: 9999px;
+    position: relative;
+    animation: one 5s infinite;
+    -webkit-animation: one 5s infinite;
+}
+  
+  .bg-shape2 {
+    width: 300px;
+    height: 300px;
+    border-radius: 9999px;
+    animation: two 4s infinite;
+    -webkit-animation: two 4s infinite;
+}
+  
+  /* Utility classes */
+  .opacity-50 {
+    opacity: 0.5;
+  }
+  
+  .bg-blur {
+    filter: blur(90px);
+
+}
+  
+  .bg-primary {
+    background-color: lightblue; /* Replace with your desired primary color */
+  }
+  
+  .bg-teal {
+    background-color: teal;
+  }
+  
+  .bg-purple {
+    background-color: rgb(140, 0, 215);
+  }
+  .bg-green {
+    background-color: rgb(144, 192, 42);
+  }
+
+  .bg-green {
+    background-color: rgb(189, 163, 19);
+  }
+    
+  .gpt_load_wrapper {
+    column-gap: 10px;
+    display:flex;
+  }
+
+.gpt_load_wrapper .dot {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: #008ae6;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: animate 1s ease-in-out infinite alternate;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.25s;
+}
+
+.dot:nth-child(2) {
+    background: #e60000;
+    animation-delay: -0.5s;
+
+}
+
+.dot:nth-child(3) {
+    background: #ffcc00;
+    animation-delay: -0.75s;
+
+}
+
+.dot:nth-child(4) {
+    background: #008800;
+    animation-delay: -1s;
+
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+
+}

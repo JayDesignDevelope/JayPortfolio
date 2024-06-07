@@ -8,11 +8,6 @@ var s1 = function (sketch) {
       { text: "CSS", url: "https://www.w3schools.com/css/" },
       { text: "JavaScript", url: "https://www.javascript.com/" },
       { text: "Python", url: "https://www.python.org/" },
-      { text: "Tensorflow", url: "https://www.tensorflow.org/" },
-      { text: "NodeJs", url: "https://nodejs.org/" },
-      { text: "Java", url: "https://www.java.com/" },
-      { text: "Email", url: "mailto:example@example.com" },
-      { text: "AWS", url: "https://aws.amazon.com/" },
       { text: "Plotly", url: "https://plotly.com/" },
       { text: "SQL", url: "https://www.w3schools.com/sql/" },
       { text: "GSAP", url: "https://greensock.com/gsap/" },
@@ -21,7 +16,24 @@ var s1 = function (sketch) {
       { text: "Figma", url: "https://www.figma.com/" },
       { text: "MongoDB", url: "https://www.mongodb.com/" },
       { text: "Tableau", url: "https://www.tableau.com/" },
-      { text: "Machine Learning", url: "https://www.coursera.org/learn/machine-learning" },
+      { text: "GraphQL", url: "https://graphql.org/" } , 
+          { text: "Plotly", url: "https://plotly.com/" },
+      { text: "SQL", url: "https://www.w3schools.com/sql/" },
+      { text: "GSAP", url: "https://greensock.com/gsap/" },
+      { text: "Angular", url: "https://angular.io/" },
+      { text: "React", url: "https://reactjs.org/" },
+      { text: "Figma", url: "https://www.figma.com/" },
+      { text: "MongoDB", url: "https://www.mongodb.com/" },
+      { text: "Tableau", url: "https://www.tableau.com/" },
+      { text: "GraphQL", url: "https://graphql.org/" }  ,    
+      { text: "Plotly", url: "https://plotly.com/" },
+      { text: "SQL", url: "https://www.w3schools.com/sql/" },
+      { text: "GSAP", url: "https://greensock.com/gsap/" },
+      { text: "Angular", url: "https://angular.io/" },
+      { text: "React", url: "https://reactjs.org/" },
+      { text: "Figma", url: "https://www.figma.com/" },
+      { text: "MongoDB", url: "https://www.mongodb.com/" },
+      { text: "Tableau", url: "https://www.tableau.com/" },
       { text: "GraphQL", url: "https://graphql.org/" }
   ];
 
@@ -34,20 +46,20 @@ var s1 = function (sketch) {
       }
 
       show() {
-          let pos = this.body.position;
-          let angle = this.body.angle;
+        const { x, y } = this.body.position;
+        const { angle } = this.body;
 
-          sketch.push();
-          sketch.translate(pos.x, pos.y);
-          sketch.rotate(angle);
-          sketch.rectMode(CENTER);
+        sketch.push();
+        sketch.translate(x, y);
+        sketch.rotate(angle);
+        sketch.rectMode(CENTER);
           sketch.fill(255);
           sketch.stroke("#0f0f0f");
-          sketch.strokeWeight(3);
-          sketch.rect(0, 0, this.word.length * 20 + 60, 80, 50);
+          sketch.strokeWeight(2);
+          sketch.rect(0, 0, this.word.length * 10 + 30, 40, 30);
           sketch.noStroke();
           sketch.fill("#0f0f0f");
-          sketch.textSize(15);
+          sketch.textSize(12);
           sketch.textAlign(CENTER, CENTER);
           sketch.text(this.word, 0, 0);
           sketch.pop();
@@ -60,11 +72,12 @@ var s1 = function (sketch) {
   }
 
   sketch.setup = function () {
-      let canvas1 = sketch.createCanvas(600, 700);
+      let canvas1 = sketch.createCanvas(580, 435);
       canvas1.parent("canvas_container");
+      canvas1.elt.style.borderRadius = '8px';
 
       engine = Matter.Engine.create();
-      ground = Matter.Bodies.rectangle(sketch.width / 2, sketch.height - 20, sketch.width, 10, {
+      ground = Matter.Bodies.rectangle(sketch.width / 2, sketch.height - 3, sketch.width, 10, {
           isStatic: true,
       });
       wallLeft = Matter.Bodies.rectangle(0, sketch.height / 2, 10, sketch.height, {
@@ -284,3 +297,4 @@ new p5(s2);
 new p5(s1);
 
 // new p5(s2);
+
