@@ -87,7 +87,7 @@ var s1 = function (sketch) {
   let canvasWidth;
   if (window.innerWidth <= 768) {
       // For mobile screens
-      canvasWidth = 430;
+      canvasWidth = 363;
       canvasHeight= 498;
   } else {
       // For larger screens like laptops and desktops
@@ -195,28 +195,28 @@ var s2 = function(sketch) {
     engine.world.gravity.y = 0;
     addBoundariescert();
 
-    for (let i = 0; i < 22; i++) {
+    for (let i = 1; i <=11; i++) {
       let x = sketch.random(100, sketch.width - 100);
       let y = sketch.random(100, sketch.height - 100);
-      items.push(new Item(x, y, `./assets/scrible/jpgs/img${i + 1}.jpg`));
-      items.push(new Item(x, y, `./assets/scrible/png/img${i + 1}.png`));
+      items.push(new Item(x, y, `./assets/scrible/jpgs/img${i}.jpg`));
+      items.push(new Item(x, y, `./assets/scrible/png/img${i}.png`));
 
     }
     };
 
     function addBoundariescert() {
-        const thickness = 10;
+        const thickness = 1000;
         World.add(engine.world, [
           Bodies.rectangle(sketch.width / 2, -thickness / 2, sketch.width, thickness, {
             isStatic: true,
           }),
-          Bodies.rectangle(sketch.width / 2, sketch.height + thickness / 2, sketch.width, thickness, {
+          Bodies.rectangle(sketch.width / 2,-thickness / 2, sketch.width, thickness, {
             isStatic: true,
           }),
-          Bodies.rectangle(-thickness / 2, sketch.height / 2, thickness, sketch.height, {
+          Bodies.rectangle(sketch.width / 2,-thickness / 2, sketch.width, thickness, {
             isStatic: true,
           }),
-          Bodies.rectangle(sketch.width + thickness / 2, sketch.height / 2, thickness, sketch.height, {
+          Bodies.rectangle(sketch.width / 2,-thickness / 2, sketch.width, thickness,{
             isStatic: true,
           }),
         ]);

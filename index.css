@@ -538,6 +538,8 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
     flex-direction: column;
     width: 100%;
     height: auto;
+    border-radius: 8px;
+
     border: solid 1px black;
   
   }
@@ -568,16 +570,19 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   .projects {
     margin: 1rem 0;
     padding: 2em 2.5em;
-  
+    background: #657192;
     display:flex;
     position: relative;
     flex-direction: column;
-  
+    border-radius: 8px;
     width: 100%;
     height: auto;
     border: solid 1px black;
-  
-  }
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
   
   .research {
     border-radius: 8px;
@@ -879,7 +884,6 @@ img {
   height: 100vh;
   margin: 2rem 0;
   overflow: hidden;
-  background: #87947D;
   opacity: 1;
   border-radius: 8px;
   transition: opacity 0.5s;
@@ -968,6 +972,7 @@ img {
   transform: translateY(-50%);
   font-size: 2em;
   color: #000;
+  
   left: 1em;
   /* transform: rotate(180deg); */
   /*EqualtorotateZ(45deg)*/cursor: pointer;
@@ -976,6 +981,8 @@ img {
 }
 .link--arrowedleft .arrow-icon {
   position: relative;
+  margin-right: 2rem;
+
   -webkit-transition: -webkit-transform 0.3s ease;
   transition: -webkit-transform 0.3s ease;
   transition: transform 0.3s ease;
@@ -1005,8 +1012,9 @@ img {
   top: 50%;
   transform: translateY(-50%);
   font-size: 2em;
-  color: #000;
+  color: #f1e6e6;
   right: 1em;
+  margin-left: 2rem;
   cursor: pointer;
   z-index: 3;
   display: inline-block;
@@ -1043,6 +1051,8 @@ img {
 /* About */
 .about_container {
   display: flex;
+  border-radius: 8px;
+
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: normal;
@@ -1146,6 +1156,15 @@ img {
   padding: 2rem;
   order: 0;
 }
+.smallProjects{
+  margin-right: 2rem;
+  text-align: center;
+}
+
+.subProjects{
+  margin-left: 2rem;
+  width: 50%;
+}
 
 
 /* phone */
@@ -1208,6 +1227,7 @@ img {
     -o-border-radius: 8px;
   }
 
+
   .canvas-container {
     width: 804px;
     /*Setwidthasperyourrequirement*/height: 300px;
@@ -1226,9 +1246,18 @@ img {
 
   .smallProjects{
     font-size: 6rem;
+    margin-right: 2rem;
+    text-align: center;
+  }
+
+  
+  .subProjects{
+    margin-left: 2rem;
+    width: 50%;
+    z-index: 100;
+
   }
   .abutton{
-    margin: 0 0 0 0;
     position: relative;
     transform: translate(-50%, -50%);
     height: 50px;
@@ -1285,7 +1314,7 @@ img {
 
 /* about button downlaod resume  */
 .abutton{
-  margin: 2rem 0 2rem  15rem;
+  margin: 2rem 0 2rem  12rem;
   position: relative;
   transform: translate(-50%, -50%);
   height: 50px;
@@ -1410,6 +1439,10 @@ align-items: center;  color: #000;
   justify-content: space-between;
 }
 
+.projects_top_container {
+  display: flex;
+  align-items: center;
+}
 .heroclose-btn {
   position: relative;
   font-size: 60px;
@@ -1582,6 +1615,15 @@ align-items: center;  color: #000;
   font-size: 2vw;
   font-weight: 500;
   color: #000000;
+  text-align: center;
+
+} 
+.subheader h3 {
+  width: 1000px;
+  font-family: "Circular Std", sans-serif;
+  font-size: 2vw;
+  font-weight: 500;
+  color: #ffffff;
   text-align: center;
 
 } 

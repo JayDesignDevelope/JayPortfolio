@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 CustomEase.create("cubic", "0.83, 0, 0.17, 1");
 let isAnimating = false;
-const colors = ["#dfe1c8", "#f0a5a5", "#a5f0e0", "#c8a5f0", "#a5c8f0","#87947D"]; // List of 5 colors
+const colors = ["#dfe1c8", "#476E9E", "#0B9195", "#345A50", "#636C7A","#9D252A"]; // List of 5 colors
 let currentIndex = 0;
 
 function splitTextIntoSpans(selector) {
@@ -176,7 +176,7 @@ function initializeCards() {
 
 
 function changeContainerColor() {
-  const container = document.querySelector(".procontainer");
+  const container = document.querySelector(".projects");
   container.style.backgroundColor = colors[currentIndex];
 }
 
