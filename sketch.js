@@ -4,37 +4,50 @@ var s1 = function (sketch) {
   let words = [];
   let ground, wallLeft, wallRight;
   let wordsToDisplay = [
-      { text: "HTML", url: "https://www.w3schools.com/html/" },
-      { text: "CSS", url: "https://www.w3schools.com/css/" },
-      { text: "JavaScript", url: "https://www.javascript.com/" },
-      { text: "Python", url: "https://www.python.org/" },
-      { text: "Plotly", url: "https://plotly.com/" },
-      { text: "SQL", url: "https://www.w3schools.com/sql/" },
-      { text: "GSAP", url: "https://greensock.com/gsap/" },
-      { text: "Angular", url: "https://angular.io/" },
-      { text: "React", url: "https://reactjs.org/" },
-      { text: "Figma", url: "https://www.figma.com/" },
-      { text: "MongoDB", url: "https://www.mongodb.com/" },
-      { text: "Tableau", url: "https://www.tableau.com/" },
-      { text: "GraphQL", url: "https://graphql.org/" } , 
-          { text: "Plotly", url: "https://plotly.com/" },
-      { text: "SQL", url: "https://www.w3schools.com/sql/" },
-      { text: "GSAP", url: "https://greensock.com/gsap/" },
-      { text: "Angular", url: "https://angular.io/" },
-      { text: "React", url: "https://reactjs.org/" },
-      { text: "Figma", url: "https://www.figma.com/" },
-      { text: "MongoDB", url: "https://www.mongodb.com/" },
-      { text: "Tableau", url: "https://www.tableau.com/" },
-      { text: "GraphQL", url: "https://graphql.org/" }  ,    
-      { text: "Plotly", url: "https://plotly.com/" },
-      { text: "SQL", url: "https://www.w3schools.com/sql/" },
-      { text: "GSAP", url: "https://greensock.com/gsap/" },
-      { text: "Angular", url: "https://angular.io/" },
-      { text: "React", url: "https://reactjs.org/" },
-      { text: "Figma", url: "https://www.figma.com/" },
-      { text: "MongoDB", url: "https://www.mongodb.com/" },
-      { text: "Tableau", url: "https://www.tableau.com/" },
-      { text: "GraphQL", url: "https://graphql.org/" }
+    { text: "Java" },
+    { text: "CSS", url: "https://www.w3schools.com/css/" },
+    { text: "JavaScript", url: "https://www.javascript.com/" },
+    { text: "Python", url: "https://www.python.org/" },
+    { text: "Plotly", url: "https://plotly.com/" },
+    { text: "SQL", url: "https://www.w3schools.com/sql/" },
+    { text: "GSAP", url: "https://greensock.com/gsap/" },
+    { text: "Angular", url: "https://angular.io/" },
+    { text: "React", url: "https://reactjs.org/" },
+    { text: "Figma", url: "https://www.figma.com/" },
+    { text: "MongoDB", url: "https://www.mongodb.com/" },
+    { text: "Tableau", url: "https://www.tableau.com/" },
+    { text: "GraphQL", url: "https://graphql.org/" },
+    { text: "SpringBoot" },
+      // Added new elements
+    { text: "Node.js" },
+    { text: "Android" },
+    { text: "Gen AI" },
+    { text: "Security" },
+    { text: "Flask" },
+    { text: "Django" },
+    { text: "Jenkins" },
+    { text: "Docker" },
+    { text: "Kubernetes" },
+    { text: "LLM" },
+    { text: "Seaborn" },
+    { text: "Linux" },
+    { text: "OAuth" },
+    { text: "Streamlit" },
+    { text: "PyTorch" },
+    { text: "DAG" },
+    { text: "System Design" },
+    { text: "Design System" },
+    { text: "Git" },
+    { text: "UI UX Design" },
+    { text: "AWS" },
+    { text: "Azure" },
+    { text: "Google Cloud" },
+    { text: "TypeScript" },
+    { text: "Machine Learning" },
+    { text: "Nest JS" },
+    { text: "TensorFlow" }, // Corrected spelling
+    { text: "Pandas" },
+    { text: "Scikit-learn" }, // Corrected hyphen
   ];
 
   class Word {
@@ -71,10 +84,21 @@ var s1 = function (sketch) {
       }
   }
 
+  let canvasWidth;
+  if (window.innerWidth <= 768) {
+      // For mobile screens
+      canvasWidth = 430;
+      canvasHeight= 498;
+  } else {
+      // For larger screens like laptops and desktops
+      canvasWidth = 740;
+      canvasHeight = 430;
+  }
+
   sketch.setup = function () {
-      let canvas1 = sketch.createCanvas(580, 435);
+      let canvas1 = sketch.createCanvas(canvasWidth, canvasHeight);
       canvas1.parent("canvas_container");
-      canvas1.elt.style.borderRadius = '8px';
+      canvas1.elt.style.borderRadius = '6px';
 
       engine = Matter.Engine.create();
       ground = Matter.Bodies.rectangle(sketch.width / 2, sketch.height - 3, sketch.width, 10, {
@@ -171,7 +195,7 @@ var s2 = function(sketch) {
     engine.world.gravity.y = 0;
     addBoundariescert();
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 22; i++) {
       let x = sketch.random(100, sketch.width - 100);
       let y = sketch.random(100, sketch.height - 100);
       items.push(new Item(x, y, `./assets/scrible/jpgs/img${i + 1}.jpg`));
@@ -181,7 +205,7 @@ var s2 = function(sketch) {
     };
 
     function addBoundariescert() {
-        const thickness = 50;
+        const thickness = 10;
         World.add(engine.world, [
           Bodies.rectangle(sketch.width / 2, -thickness / 2, sketch.width, thickness, {
             isStatic: true,
@@ -212,9 +236,9 @@ var s2 = function(sketch) {
   class Item {
     constructor(x, y, imagePath) {
       let options = {
-        frictionAir: 0.075,
-        restitution: 0.25,
-        density: 0.002,
+        frictionAir: 0.0075,
+        restitution: 0.025,
+        density: 0.02,
         angle: Math.random() * Math.PI * 2,
       };
       this.body = Bodies.rectangle(x, y, 100, 100, options);

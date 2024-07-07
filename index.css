@@ -343,7 +343,6 @@ h1 span.stop-blinking::before {
 }
 
 .tv{
-  font-family: w;
   display: flex;
   text-transform: capitalize;
 }
@@ -723,6 +722,9 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   }
   
   
+/* Add this to your CSS file */
+
+/* Add this to your CSS file */
 
 
 /* Research  */
@@ -890,7 +892,7 @@ img {
 .slider {
   
   position: absolute;
-  top: 15vh;
+  top: 7vh;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -914,9 +916,10 @@ img {
 
 .card img {
   position: absolute;
-  width: 100%;
-  height: 100%;
+
   opacity: 0.75;
+  object-fit: fill;
+
 }
 
 .copy {
@@ -931,11 +934,20 @@ img {
 .proclass {
   position: relative;
   text-align: center;
-  font-family: "PP Editorial Old";
-  font-size: 6vw;
+  font-family: "samsung_bold";
+  font-size: 4vw;
   font-weight: 300;
   letter-spacing: -0.05em;
   text-transform: uppercase;
+  color: #dfe1c8;
+  text-shadow: 1px 1px 2px black, 0 0 25px rgb(27, 27, 27), 0 0 5px rgb(59, 59, 60);
+
+}
+
+.proclasssub {
+  position: relative;
+  text-align: center;
+  font-family: "uber_lit";
   color: #dfe1c8;
 }
 
@@ -1044,7 +1056,6 @@ img {
 .about-items:nth-child(1) {
   width: 100%;
   height: 200px;
-  display: block;
   flex-grow: 0;
   flex-shrink: 1;
   flex-basis: auto;
@@ -1076,7 +1087,6 @@ img {
 
 }
 .about-items-2:nth-child(1) {
-  display: block;
   width: 100%;
   height: 500px;
   flex-grow: 0;
@@ -1098,6 +1108,8 @@ img {
   padding: 2rem;
   order: 0;
 }
+
+
 
 
 .about-items:nth-child(3) {
@@ -1135,13 +1147,149 @@ img {
   order: 0;
 }
 
+
+/* phone */
+@media (max-width: 768px) {
+  .about-items:nth-child(1){
+    height: 0;
+    display: none;
+  }
+
+  .v_container{
+    position: absolute;
+    top: 0;
+    border-radius: 8px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    background-color: #000000;
+    background-image: url('./assets/hero/bg_jay_cover_portrait.png');
+    background-size: cover;
+    grid-template-columns: 2fr 1fr;
+    /* opacity: 0; */
+  }
+  
+  
+  
+  .left-side{
+    margin: 0;
+    display: flex;
+    margin-top: 50%;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8rem;
+  }
+
+  .type-effect{
+    font-size: 6rem;
+  }
+  
+  .overlay-toggle{
+    visibility: hidden;
+  }
+
+  .about{
+    padding: 0;
+  }
+
+  .about-items-2:nth-child(2){
+    padding: 1rem;
+  }
+  #canvas_container{
+    background-color: #ffffff;
+    width: 300px;
+    align-items: end;
+    border: #000 2px solid;
+    height: 500px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
+
+  .canvas-container {
+    width: 804px;
+    /*Setwidthasperyourrequirement*/height: 300px;
+    /*Setheightasperyourrequirement*/background-color: #ccc;
+    /*Examplebackgroundcolor*/margin-left: auto;
+    /*Pushesthecanvas-containertotheright*/margin-top: 1px;
+    /*Adjustmarginasneeded*/border: #000 2px solid;
+    display: flex;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+  }
+  
+
+  .smallProjects{
+    font-size: 6rem;
+  }
+  .abutton{
+    margin: 0 0 0 0;
+    position: relative;
+    transform: translate(-50%, -50%);
+    height: 50px;
+    width: 250px;
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    border: 1px solid rgb(136, 136, 136);
+    justify-content: center;
+    align-items: center;
+    background: #ffffff;
+    border-radius: 55px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow: hidden;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+  }
+
+
+
+  .about-items:nth-child(2){
+    display: block;
+  }
+  .about-items-2:nth-child(1) {
+    width: 100%;
+
+  }
+  .about-items-2:nth-child(2) {
+    display: block;
+    width: 100%;
+    height: 600px;
+    padding-top: 5rem;
+
+
+  }
+  .no-wrap {
+    white-space: normal; /* Allow line breaks */
+    overflow-wrap: normal; /* Default value to avoid breaking words */
+    word-break: normal; /* Default value to avoid breaking words */
+  }
+
+
+
+  .about-items:nth-child(3){
+    display: block;
+  }
+}
+
+
+    
+
+
 /* about button downlaod resume  */
 .abutton{
-  margin: 2rem 5rem;
+  margin: 2rem 0 2rem  15rem;
   position: relative;
   transform: translate(-50%, -50%);
   height: 50px;
-  width: 150px;
+  width: 250px;
   padding: 10px 10px 10px 10px;
   display: flex;
   border: 1px solid rgb(136, 136, 136);
@@ -1357,13 +1505,18 @@ align-items: center;  color: #000;
 }
 
 .canvas-container {
-  width: 804px; /* Set width as per your requirement */
-  height: 300px; /* Set height as per your requirement */
-  background-color: #ccc; /* Example background color */
-  margin-left: auto; /* Pushes the canvas-container to the right */
-  margin-top: 1px; /* Adjust margin as needed */
-  border: #000 2px solid;
+  width: 804px;
+  /*Setwidthasperyourrequirement*/height: 300px;
+  /*Setheightasperyourrequirement*/background-color: #ccc;
+  /*Examplebackgroundcolor*/margin-left: auto;
+  /*Pushesthecanvas-containertotheright*/margin-top: 1px;
+  /*Adjustmarginasneeded*/border: #000 2px solid;
   display: flex;
+  border-radius: 6px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
 }
 #canvas_container{
   background-color: #ffffff;
@@ -1383,12 +1536,17 @@ align-items: center;  color: #000;
 
 .containercanvas {
   display: flex;
-  margin-left: auto; /* This will push the .containercanvas div to the right */
-  border: #000 1px solid;
+  margin-left: auto;
+  /*Thiswillpushthe.containercanvasdivtotheright*/border: #ffffff 1px solid;
   justify-content: flex-end;
   align-items: center;
   height: 100%;
-  }
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
 
 
 

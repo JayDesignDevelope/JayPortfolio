@@ -99,6 +99,43 @@ function isItem(target) {
 
 //Projects--------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
+
+  //redirecting links for cards
+  // Get the card element by its ID
+  const Mlcard = document.getElementById('mlcard');
+
+  // Add a click event listener to the card
+  Mlcard.addEventListener('click', function() {
+      // Open google.com in a new tab
+      window.open('https://machinelearning-model-explorer.netlify.app/', '_blank');
+  });
+  const algocard = document.getElementById('algocard');
+  algocard.addEventListener('click', function() {
+      window.open('https://jays-algorithms-visualiser-pyqt.netlify.app/', '_blank');
+  });
+
+
+  const turtlecard = document.getElementById('turtlecard');
+  turtlecard.addEventListener('click', function() {
+      window.open('https://jayvinayportfolio.netlify.app/html/pages/geometry%20turtle.html', '_blank');
+  });
+  const inventarycard = document.getElementById('inventarycard');
+  inventarycard.addEventListener('click', function() {
+      window.open('https://jays-inventory-management-system.netlify.app/', '_blank');
+  });
+
+  const linkedin = document.getElementById('linkedin');
+  linkedin.addEventListener('click', function() {
+      window.open('https://www.linkedin.com/in/jay-vinay/', '_blank');
+  });
+  
+
+
+
+
+
+
+
   splitTextIntoSpans(".copy h1");
   initializeCards();
   gsap.set("h1 span", { y: -200 });
@@ -226,37 +263,37 @@ function goToPrevCard() {
   });
 }
 
-function addCardClickHandler() {
-  document.querySelectorAll(".card").forEach((card) => {
-    card.addEventListener("click", function () {
-      // if (card.querySelector("h1").innerText === "Ethereal Noir") {
-        animateAndRedirect(card);
-      //}
-    });
-  });
-}
+// function addCardClickHandler() {
+//   document.querySelectorAll(".card").forEach((card) => {
+//     card.addEventListener("click", function () {
+//       // if (card.querySelector("h1").innerText === "Ethereal Noir") {
+//         animateAndRedirect(card);
+//       //}
+//     });
+//   });
+// }
 
-function animateAndRedirect(card) {
-  gsap.to(card, {
-    scale: 1.2,
-    zIndex: 10,
-    y: "-50%",
-    duration: 0.75,
-    ease: "cubic",
-    onComplete: () => {
-      gsap.to(card, {
-        scale: 5,
-        width: "100vw",
-        height: "100vh",
-        duration: 0.75,
-        ease: "cubic",
-        onComplete: () => {
-          window.location.href = "netflix.html";
-        }
-      });
-    }
-  });
-}
+// function animateAndRedirect(card) {
+//   gsap.to(card, {
+//     scale: 1.2,
+//     zIndex: 10,
+//     y: "-50%",
+//     duration: 0.75,
+//     ease: "cubic",
+//     onComplete: () => {
+//       gsap.to(card, {
+//         scale: 5,
+//         width: "100vw",
+//         height: "100vh",
+//         duration: 0.75,
+//         ease: "cubic",
+//         onComplete: () => {
+//           window.location.href = "netflix.html";
+//         }
+//       });
+//     }
+//   });
+// }
 
 document.addEventListener("DOMContentLoaded", function () {
   splitTextIntoSpans(".copy h1");
@@ -449,17 +486,17 @@ link.dispatchEvent(new MouseEvent('click'));
       );
     }
 
-    overlayToggle.addEventListener("click", () => {
-      sidebar.style.pointerEvents = "all";
-      animateCardsIn();
-    });
+    // overlayToggle.addEventListener("click", () => {
+    //   sidebar.style.pointerEvents = "all";
+    //   animateCardsIn();
+    // });
 
-    cards.forEach((card) => {
-      card.addEventListener("click", () => {
-        sidebar.style.pointerEvents = "none";
-        animateCardsOut();
-      });
-    });
+    // cards.forEach((card) => {
+    //   card.addEventListener("click", () => {
+    //     sidebar.style.pointerEvents = "none";
+    //     animateCardsOut();
+    //   });
+    // });
 });
 
 
@@ -495,14 +532,14 @@ link.dispatchEvent(new MouseEvent('click'));
 
 // Scribble
  // Load external HTML file into the preview container
- window.onload = function() {
-    fetch('./about.html')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('preview-container').innerHTML = data;
-      })
-      .catch(error => console.error('Error:', error));
-  };
+//  window.onload = function() {
+//     fetch('./about.html')
+//       .then(response => response.text())
+//       .then(data => {
+//         document.getElementById('preview-container').innerHTML = data;
+//       })
+//       .catch(error => console.error('Error:', error));
+//   };
 
 
 
@@ -559,29 +596,7 @@ gsap.to(".wheel", {
 
 
 
-  //regenrative js hero
-  document.addEventListener("DOMContentLoaded", function() {
-    // Function to load bio content from bio.txt file
-    function loadBio() {
-      fetch('bio.txt')
-        .then(response => response.text())
-        .then(data => {
-          // Update the bio container with the content from bio.txt
-          document.getElementById('bio-container').innerHTML = data;
-        })
-        .catch(error => {
-          console.error('Error fetching bio:', error);
-          document.getElementById('bio-container').innerHTML = '<p>Error loading bio. Please try again later.</p>';
-        });
-    }
-  
-    // Load bio content initially
-    loadBio();
-  
-    // Reload bio content when reload icon is clicked
-    document.getElementById('reload-icon').addEventListener('click', function() {
-      loadBio();
-    });
-  });
+
+
 
 
