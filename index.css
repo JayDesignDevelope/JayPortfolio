@@ -506,6 +506,9 @@ display: flex;  /* margin-bottom: 6rem; */
     /* top: 120px; */
     width: auto;
   }
+  .typewriter{
+    font-size: 120px;
+  }
   
   
   .hero {
@@ -791,7 +794,13 @@ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, O
   transform: translateZ(0) rotate(20deg);
   transform-origin: bottom center;
 }
-
+.topleft {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 350px;
+  
+}
 .overlay::-webkit-scrollbar {
   display: none;
 }
@@ -947,7 +956,9 @@ img {
   text-shadow: 1px 1px 2px black, 0 0 25px rgb(27, 27, 27), 0 0 5px rgb(59, 59, 60);
 
 }
-
+#barcode {
+  margin-top: 20px;
+}
 .proclasssub {
   position: relative;
   text-align: center;
@@ -1169,6 +1180,19 @@ img {
 
 /* phone */
 @media (max-width: 768px) {
+  .topleft {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 180px;
+    
+  }
+
+  .typewriter{
+    font-size: 60px;
+  }
+  
+
   .about-items:nth-child(1){
     height: 0;
     display: none;

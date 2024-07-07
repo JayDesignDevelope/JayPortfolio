@@ -296,6 +296,33 @@ function goToPrevCard() {
 // }
 
 document.addEventListener("DOMContentLoaded", function () {
+//barcode
+
+
+
+
+
+
+//seting logo on top left banner 
+function setResponsiveImage() {
+  var heroImage = document.getElementById('heroImage');
+  if (window.innerWidth <= 768) { // If screen width is less than or equal to 768px
+      heroImage.src = 'assets/hero/name_white_phone.png';
+  } else { // If screen width is greater than 768px
+      heroImage.src = 'assets/hero/name_white.png';
+  }
+}
+
+// Set the image when the page loads
+window.onload = setResponsiveImage;
+
+// Update the image when the window is resized
+window.onresize = setResponsiveImage;
+
+
+
+
+
   splitTextIntoSpans(".copy h1");
   initializeCards();
   gsap.set("h1 span", { y: -200 });
