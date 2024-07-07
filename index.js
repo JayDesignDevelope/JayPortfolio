@@ -409,7 +409,7 @@ function redirectToIndex() {
 
         // Create a link element
         const link = document.createElement('a');
-        link.href = 'https://drive.google.com/file/d/1lgTul5YHOFnB1mWJ3vsmO-0sRsOS67_L/view?usp=sharing'; // Update with the correct path to your PDF
+        link.href = 'https://drive.google.com/file/d/1IgotWSUlnKzTS6ynXUdubIAvvDbEznRJ/view?usp=sharing'; // Update with the correct path to your PDF
         
         link.target = '_blank'; // Open in a new tab
 
