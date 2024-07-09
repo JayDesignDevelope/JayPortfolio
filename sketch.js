@@ -34,7 +34,6 @@ var s1 = function (sketch) {
     { text: "OAuth" },
     { text: "Streamlit" },
     { text: "PyTorch" },
-    { text: "Retrieval Augmented Generation" },
     { text: "System Design" },
     { text: "Design System" },
     { text: "Git" },
