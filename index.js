@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const linkedin = document.getElementById('linkedin');
   linkedin.addEventListener('click', function() {
-      window.open('https://www.linkedin.com/in/jay-vinay/', '_blank');
+      window.open('https://jaygpt.streamlit.app/', '_blank');
   });
   
 

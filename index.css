@@ -1230,7 +1230,9 @@ img {
   }
   
   .overlay-toggle{
-    visibility: hidden;
+    /* visibility: hidden; */
+    top:1px;
+    
   }
 
   .about{
@@ -1418,7 +1420,7 @@ img {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 250px;
+  width: 150px;
   height: 60px;
   margin: 0.75em;
   padding: 1em;
