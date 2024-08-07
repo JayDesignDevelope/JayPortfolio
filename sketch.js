@@ -86,7 +86,7 @@ var s1 = function (sketch) {
   let canvasWidth;
   if (window.innerWidth <= 768) {
       // For mobile screens
-      canvasWidth = 363;
+      canvasWidth = 566;
       canvasHeight= 498;
   } else {
       // For larger screens like laptops and desktops

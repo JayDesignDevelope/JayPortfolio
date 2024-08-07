@@ -310,8 +310,13 @@ function setResponsiveImage() {
       heroImage.src = 'assets/hero/name_white_phone.png';
   } else { // If screen width is greater than 768px
       heroImage.src = 'assets/hero/name_white.png';
+    
   }
 }
+
+
+
+
 
 // Set the image when the page loads
 window.onload = setResponsiveImage;
@@ -392,6 +397,13 @@ function redirectToIndex() {
 
   /* Sidebar in Hero for nav----------------------------------------- */
   document.addEventListener("DOMContentLoaded", () => {
+
+    //loader responsive 
+
+
+
+
+
     const container = document.querySelector(".wrapper");
     const sidebar = document.querySelector(".herosidebar");
     const cards = gsap.utils.toArray(".herocard");
@@ -513,60 +525,7 @@ link.dispatchEvent(new MouseEvent('click'));
       );
     }
 
-    // overlayToggle.addEventListener("click", () => {
-    //   sidebar.style.pointerEvents = "all";
-    //   animateCardsIn();
-    // });
-
-    // cards.forEach((card) => {
-    //   card.addEventListener("click", () => {
-    //     sidebar.style.pointerEvents = "none";
-    //     animateCardsOut();
-    //   });
-    // });
 });
-
-
-
-// Hero txt
-
-
-// const tlhero = gsap.timeline();
-
-// tlhero.from('.left-side div',{
-//   y:150,
-//   opacity:0,
-//   stagger:{
-//     amount:.4
-//   },
-//   delay:.5
-// })
-
-
-
-// ScrollTrigger.create({
-//   animation:tlhero,
-//   trigger:'.wrapper',
-//   start:"top top",
-//   end:"+=600",
-//   scrub:1,
-//   pin:true,
-//   ease:"ease"
-// })
-
-
-
-
-// Scribble
- // Load external HTML file into the preview container
-//  window.onload = function() {
-//     fetch('./about.html')
-//       .then(response => response.text())
-//       .then(data => {
-//         document.getElementById('preview-container').innerHTML = data;
-//       })
-//       .catch(error => console.error('Error:', error));
-//   };
 
 
 
@@ -620,6 +579,31 @@ gsap.to(".wheel", {
 
 
 
+  document.addEventListener("DOMContentLoaded", function() {
+    function updateVideoSource() {
+        const videoSource = document.querySelector(".videoSource");
+        const mobileVideoSrc = videoSource.getAttribute("data-mobile-src");
+        const defaultVideoSrc = videoSource.getAttribute("src");
+
+        if (window.innerWidth <= 768) { // Adjust this value based on your breakpoint for mobile
+            if (videoSource.getAttribute("src") !== mobileVideoSrc) {
+                videoSource.setAttribute("src", mobileVideoSrc);
+                videoSource.parentElement.load(); // Reload the video with the new source
+            }
+        } else {
+            if (videoSource.getAttribute("src") !== defaultVideoSrc) {
+                videoSource.setAttribute("src", defaultVideoSrc);
+                videoSource.parentElement.load();
+            }
+        }
+    }
+
+    // Call the function on initial load
+    updateVideoSource();
+
+    // Call the function on window resize
+    window.addEventListener("resize", updateVideoSource);
+});
 
 
 
