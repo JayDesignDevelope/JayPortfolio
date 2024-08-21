@@ -399,31 +399,8 @@ function redirectToIndex() {
   document.addEventListener("DOMContentLoaded", () => {
 
     //loader responsive 
-// URLs for your videos
-const horizontalVideo = 'assets/hero/jayportfolio.mp4';
-const verticalVideo = 'assets/hero/jayportfolio_vertical.mp4';
+    loadVideo(); // Load the appropriate video source as soon as DOM is ready
 
-// Get the video element
-const videoElement = document.getElementById('responsive-video');
-
-// Function to load the correct video based on screen size
-function loadVideo() {
-    if (window.innerWidth >= 1024) {
-        // For larger screens like laptops
-        videoElement.src = horizontalVideo;
-    } else {
-        // For smaller screens like phones
-        videoElement.src = verticalVideo;
-    }
-
-    videoElement.load(); // Load the video source
-}
-
-// Load the appropriate video when the page loads
-window.addEventListener('load', loadVideo);
-
-// Reload video on window resize (optional)
-window.addEventListener('resize', loadVideo);
 
 
 
@@ -553,6 +530,23 @@ link.dispatchEvent(new MouseEvent('click'));
 });
 
 
+window.addEventListener('resize', loadVideo); // Optional: Adjust the video on window resize
+
+function loadVideo() {
+    const videoElement = document.getElementById('responsive-video');
+    // URLs for your videos
+    const horizontalVideo = 'assets/hero/jayportfolio.mp4';
+    const verticalVideo = 'assets/hero/jayportfolio_vertical.mp4';
+
+    // Set the video source based on screen width
+    if (window.innerWidth >= 1024) {
+        videoElement.src = horizontalVideo;
+    } else {
+        videoElement.src = verticalVideo;
+    }
+
+    videoElement.play(); // Start playing the video immediately
+}
 
 
 // Certificates
