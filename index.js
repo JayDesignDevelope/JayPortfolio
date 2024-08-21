@@ -535,8 +535,8 @@ window.addEventListener('resize', loadVideo); // Optional: Adjust the video on w
 function loadVideo() {
     const videoElement = document.getElementById('responsive-video');
     // URLs for your videos
-    const horizontalVideo = 'assets/hero/jayportfolio.mp4';
-    const verticalVideo = 'assets/hero/jayportfolio_vertical.mp4';
+    const horizontalVideo = 'assets/hero/horizantal.m4v';
+    const verticalVideo = 'assets/hero/vertical.m4v';
 
     // Set the video source based on screen width
     if (window.innerWidth >= 1024) {
