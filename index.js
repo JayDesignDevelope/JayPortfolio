@@ -399,6 +399,31 @@ function redirectToIndex() {
   document.addEventListener("DOMContentLoaded", () => {
 
     //loader responsive 
+// URLs for your videos
+const horizontalVideo = 'assets/hero/jayportfolio.mp4';
+const verticalVideo = 'assets/hero/jayportfolio_vertical.mp4';
+
+// Get the video element
+const videoElement = document.getElementById('responsive-video');
+
+// Function to load the correct video based on screen size
+function loadVideo() {
+    if (window.innerWidth >= 1024) {
+        // For larger screens like laptops
+        videoElement.src = horizontalVideo;
+    } else {
+        // For smaller screens like phones
+        videoElement.src = verticalVideo;
+    }
+
+    videoElement.load(); // Load the video source
+}
+
+// Load the appropriate video when the page loads
+window.addEventListener('load', loadVideo);
+
+// Reload video on window resize (optional)
+window.addEventListener('resize', loadVideo);
 
 
 
@@ -577,33 +602,6 @@ gsap.to(".wheel", {
 
 
 
-
-
-  document.addEventListener("DOMContentLoaded", function() {
-    function updateVideoSource() {
-        const videoSource = document.querySelector(".videoSource");
-        const mobileVideoSrc = videoSource.getAttribute("data-mobile-src");
-        const defaultVideoSrc = videoSource.getAttribute("src");
-
-        if (window.innerWidth <= 768) { // Adjust this value based on your breakpoint for mobile
-            if (videoSource.getAttribute("src") !== mobileVideoSrc) {
-                videoSource.setAttribute("src", mobileVideoSrc);
-                videoSource.parentElement.load(); // Reload the video with the new source
-            }
-        } else {
-            if (videoSource.getAttribute("src") !== defaultVideoSrc) {
-                videoSource.setAttribute("src", defaultVideoSrc);
-                videoSource.parentElement.load();
-            }
-        }
-    }
-
-    // Call the function on initial load
-    updateVideoSource();
-
-    // Call the function on window resize
-    window.addEventListener("resize", updateVideoSource);
-});
 
 
 
