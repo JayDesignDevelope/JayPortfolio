@@ -399,7 +399,6 @@ function redirectToIndex() {
   document.addEventListener("DOMContentLoaded", () => {
 
     //loader responsive 
-    loadVideo(); // Load the appropriate video source as soon as DOM is ready
 
 
 
@@ -530,23 +529,6 @@ link.dispatchEvent(new MouseEvent('click'));
 });
 
 
-window.addEventListener('resize', loadVideo); // Optional: Adjust the video on window resize
-
-function loadVideo() {
-    const videoElement = document.getElementById('responsive-video');
-    // URLs for your videos
-    const horizontalVideo = 'assets/hero/horizantal.m4v';
-    const verticalVideo = 'assets/hero/vertical.m4v';
-
-    // Set the video source based on screen width
-    if (window.innerWidth >= 1024) {
-        videoElement.src = horizontalVideo;
-    } else {
-        videoElement.src = verticalVideo;
-    }
-
-    videoElement.play(); // Start playing the video immediately
-}
 
 
 // Certificates
