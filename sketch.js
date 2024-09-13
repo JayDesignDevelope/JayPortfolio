@@ -170,38 +170,112 @@ var s2 = function(sketch) {
     let lastMouseY = -1;
 
   
-    sketch.setup = function() {
-    //   setupbgcert();
+    let straightenMode = false;
+    let gridColumns = 4;
+    let gridRows = 3;
 
-    // const myDiv = getElementById('certcanvas_container');
-            // const myCanvas = $('.grid-canvas');
-            // myCanvas.width = myDiv.offsetWidth;
-            // myCanvas.height = myDiv.offsetHeight;
+    let expandedItem = null;
+    let straightenButton;
 
+    class Item {
+      constructor(x, y, imagePath) {
+        let options = {
+          frictionAir: 0.0075,
+          restitution: 0.025,
+          density: 0.02,
+          angle: Math.random() * Math.PI * 2,
+        };
+        this.body = Bodies.rectangle(x, y, 100, 100, options);
+        World.add(engine.world, this.body);
+        this.div = document.createElement("div");
+        this.div.className = "certitem";
+        this.div.style.left = `${this.body.position.x - 50}px`;
+        this.div.style.top = `${this.body.position.y - 100}px`;
+        const img = document.createElement("img");
+        img.src = imagePath;
+        this.div.appendChild(img);
+        const container2 = document.getElementById('certcanvas_container');
+        if (container2) {
+            container2.appendChild(this.div);
+        } else {
+            console.error(`Container element with id '${containerId}' not found.`);
+        }
+      
+        this.div.style.transition = 'all 0.5s ease-in-out';
 
-            const certContainerCanvas = document.querySelector('.certcontainercanvas');
+        this.isExpanded = false;
+        this.originalWidth = 100;
+        this.originalHeight = 100;
+        this.expandedWidth = 380;
+        this.expandedHeight = 300;
+
+        this.div.addEventListener('click', () => this.toggleExpand());
+
+        this.closeButton = document.createElement('button');
+        this.closeButton.className = 'close-btn';
+        this.closeButton.innerHTML = '&times;'; // Unicode for times symbol (×)
+        this.closeButton.style.display = 'none';
+        this.closeButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          this.toggleExpand();
+        });
+        this.div.appendChild(this.closeButton);
+      }
+
     
-            // Get the bounding rectangle
-            const rect = certContainerCanvas.getBoundingClientRect();
-            
-            // Get the width and height
-            const width = rect.width;
-            const height = rect.height;
-    let canvas2=sketch.createCanvas(width,height);
+      toggleExpand() {
+        if (expandedItem && expandedItem !== this) {
+          expandedItem.toggleExpand();
+        }
 
-    canvas2.parent("certcanvas_container")
-    engine = Engine.create();
-    engine.world.gravity.y = 0;
-    addBoundariescert();
+        this.isExpanded = !this.isExpanded;
+        if (this.isExpanded) {
+          expandedItem = this;
+          this.div.style.zIndex = '1000';
+          this.div.style.width = `${this.expandedWidth}px`;
+          this.div.style.height = `${this.expandedHeight}px`;
+          this.closeButton.style.display = 'block';
+          Matter.Body.setStatic(this.body, true);
+        } else {
+          expandedItem = null;
+          this.div.style.zIndex = '1';
+          this.div.style.width = `${this.originalWidth}px`;
+          this.div.style.height = `${this.originalHeight}px`;
+          this.closeButton.style.display = 'none';
+          Matter.Body.setStatic(this.body, false);
+        }
+      }
 
-    for (let i = 1; i <=11; i++) {
-      let x = sketch.random(100, sketch.width - 100);
-      let y = sketch.random(100, sketch.height - 100);
-      items.push(new Item(x, y, `./assets/scrible/jpgs/img${i}.jpg`));
-      items.push(new Item(x, y, `./assets/scrible/png/img${i}.png`));
-
+      update() {
+        if (straightenMode) {
+          this.div.style.left = `${this.body.position.x - this.originalWidth/2}px`;
+          this.div.style.top = `${this.body.position.y - this.originalHeight/2}px`;
+          this.div.style.transform = 'rotate(0deg)';
+        } else if (!this.isExpanded) {
+          this.div.style.left = `${this.body.position.x - this.originalWidth/2}px`;
+          this.div.style.top = `${this.body.position.y - this.originalHeight/2}px`;
+          this.div.style.transform = `rotate(${this.body.angle}rad)`;
+        }
+      }
     }
-    };
+
+    function arrangeGrid() {
+      let itemWidth = sketch.width / gridColumns;
+      let itemHeight = sketch.height / gridRows;
+
+      items.forEach((item, index) => {
+        let col = index % gridColumns;
+        let row = Math.floor(index / gridColumns);
+        
+        let targetX = col * itemWidth + itemWidth / 2;
+        let targetY = row * itemHeight + itemHeight / 2;
+
+        Matter.Body.setPosition(item.body, { x: targetX, y: targetY });
+        Matter.Body.setAngle(item.body, 0);
+        Matter.Body.setVelocity(item.body, { x: 0, y: 0 });
+        Matter.Body.setAngularVelocity(item.body, 0);
+      });
+    }
 
     function addBoundariescert() {
         const thickness = 1000;
@@ -221,80 +295,110 @@ var s2 = function(sketch) {
         ]);
       };
 
+    sketch.setup = function() {
+      const certContainerCanvas = document.querySelector('.certcontainercanvas');
+      
+      // Get the bounding rectangle
+      const rect = certContainerCanvas.getBoundingClientRect();
+      
+      // Get the width and height
+      const width = rect.width;
+      const height = rect.height;
+      let canvas2=sketch.createCanvas(width,height);
 
+      canvas2.parent("certcanvas_container")
+      engine = Engine.create();
+      engine.world.gravity.y = 0;
+      addBoundariescert();
 
+      for (let i = 1; i <=11; i++) {
+        let x = sketch.random(100, sketch.width - 100);
+        let y = sketch.random(100, sketch.height - 100);
+        items.push(new Item(x, y, `./assets/scrible/jpgs/img${i}.jpg`));
+        items.push(new Item(x, y, `./assets/scrible/png/img${i}.png`));
 
-  
-  draw = function () {
-    //for canvas 2
-    sketch.background(129);
-    Engine.update(engine);
-    items.forEach((item)=>item.update());
-  };
-
-  class Item {
-    constructor(x, y, imagePath) {
-      let options = {
-        frictionAir: 0.0075,
-        restitution: 0.025,
-        density: 0.02,
-        angle: Math.random() * Math.PI * 2,
-      };
-      this.body = Bodies.rectangle(x, y, 100, 100, options);
-      World.add(engine.world, this.body);
-      this.div = document.createElement("div");
-      this.div.className = "certitem";
-      this.div.style.left = `${this.body.position.x - 50}px`;
-      this.div.style.top = `${this.body.position.y - 100}px`;
-      const img = document.createElement("img");
-      img.src = imagePath;
-      this.div.appendChild(img);
-      const container2 = document.getElementById('certcanvas_container');
-      if (container2) {
-          container2.appendChild(this.div);
-      } else {
-          console.error(`Container element with id '${containerId}' not found.`);
       }
-    
+
+      straightenButton = document.getElementById('straightenAllBtn');
+      
+      straightenButton.addEventListener('click', toggleStraighten);
+    };
+
+    function toggleStraighten() {
+      straightenMode = !straightenMode;
+      if (straightenMode) {
+        arrangeGrid();
+        straightenButton.textContent = "Release Certificates";
+      } else {
+        releaseItems();
+        straightenButton.textContent = "Straighten All Certificates";
+      }
     }
 
-  
-    update() {
-      this.div.style.left = `${this.body.position.x - 50}px`;
-      this.div.style.top = `${this.body.position.y - 100}px`;
-      this.div.style.transform = `rotate(${this.body.angle}rad)`;
-    }
-  };
-  
-
-  sketch.mouseMoved = function() {
-    if (sketch.dist(sketch.mouseX, sketch.mouseY, lastMouseX, lastMouseY) > 10) {
-      lastMouseX = sketch.mouseX;
-      lastMouseY = sketch.mouseY;
-
+    function releaseItems() {
       items.forEach((item) => {
-        if (sketch.dist(sketch.mouseX, sketch.mouseY, item.body.position.x, item.body.position.y) < 150) {
-          let forceMagnitude = 3;
-          Body.applyForce(
-            item.body,
-            {
-              x: item.body.position.x,
-              y: item.body.position.y,
-            },
-            {
-              x: sketch.random(-forceMagnitude, forceMagnitude),
-              y: sketch.random(-forceMagnitude, forceMagnitude),
-            }
-          );
-        }
+        Matter.Body.setStatic(item.body, false);
+        let force = Matter.Vector.create(
+          (Math.random() - 0.5) * 0.05,
+          (Math.random() - 0.5) * 0.05
+        );
+        Matter.Body.applyForce(item.body, item.body.position, force);
       });
     }
-  }
 
+    draw = function () {
+      //for canvas 2
+      sketch.background(0);
+      Engine.update(engine);
+      items.forEach((item)=>item.update());
 
+      if (straightenMode) {
+        items.forEach((item) => {
+          Matter.Body.setVelocity(item.body, { x: 0, y: 0 });
+          Matter.Body.setAngularVelocity(item.body, 0);
+        });
+      } else {
+        // Prevent overlapping
+        for (let i = 0; i < items.length; i++) {
+          for (let j = i + 1; j < items.length; j++) {
+            let bodyA = items[i].body;
+            let bodyB = items[j].body;
+            let distance = Matter.Vector.magnitude(Matter.Vector.sub(bodyA.position, bodyB.position));
+            if (distance < 100) {
+              let force = Matter.Vector.sub(bodyA.position, bodyB.position);
+              Matter.Body.applyForce(bodyA, bodyA.position, Matter.Vector.mult(force, 0.0001));
+              Matter.Body.applyForce(bodyB, bodyB.position, Matter.Vector.mult(force, -0.0001));
+            }
+          }
+        }
+      }
+    };
 
+    sketch.mouseMoved = function() {
+      if (!straightenMode) {
+        if (sketch.dist(sketch.mouseX, sketch.mouseY, lastMouseX, lastMouseY) > 10) {
+          lastMouseX = sketch.mouseX;
+          lastMouseY = sketch.mouseY;
 
-
+          items.forEach((item) => {
+            if (sketch.dist(sketch.mouseX, sketch.mouseY, item.body.position.x, item.body.position.y) < 150) {
+              let forceMagnitude = 3;
+              Body.applyForce(
+                item.body,
+                {
+                  x: item.body.position.x,
+                  y: item.body.position.y,
+                },
+                {
+                  x: sketch.random(-forceMagnitude, forceMagnitude),
+                  y: sketch.random(-forceMagnitude, forceMagnitude),
+                }
+              );
+            }
+          });
+        }
+      }
+    }
 };
   // Create a new p5 instance using s5
 new p5(s2);
