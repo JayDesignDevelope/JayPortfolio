@@ -25,6 +25,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+}
+
 body {
     font-family: 'UberMove', 'Inter', -apple-system, sans-serif;
     background-color: #1a1a1a;
@@ -988,6 +993,7 @@ body {
     .sidebar {
         padding: 16px;
         justify-content: center;
+        flex-direction: column;
     }
     .social-section, .transform-btn {
         display: none !important; /* Hide to save space */
@@ -1120,6 +1126,14 @@ body {
         bottom: 24px;
         right: 24px;
         padding: 24px;
+    }
+    
+    .jaygpt-modal.fixed-mode {
+        width: calc(100vw - 48px);
+        bottom: 24px;
+        right: 24px;
+        left: 24px;
+        max-width: none;
     }
 }
 
@@ -2046,7 +2060,7 @@ body {
 
     /* Mobile Bento Grid Dashboard Density */
     .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 12px;
         grid-auto-flow: dense;
         grid-auto-rows: minmax(160px, auto);
@@ -2056,12 +2070,12 @@ body {
         border-radius: 16px;
     }
     .bento-card.featured, .bento-card.wide {
-        grid-column: span 2;
+        grid-column: span 1;
         grid-row: span 1;
     }
     .bento-card.tall {
         grid-column: span 1;
-        grid-row: span 2;
+        grid-row: span 1;
     }
     .bento-body h3 {
         font-size: 1.1rem !important;
