@@ -1,1 +1,5 @@
 config.js
+node_modules/
+JayNotificationServer/node_modules/
+serviceAccountKey.json
+JayNotificationServer/serviceAccountKey.json

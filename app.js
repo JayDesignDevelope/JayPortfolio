@@ -627,6 +627,29 @@ function dispatchTelemetryReport() {
         body: formData
     }).then(res => res.json()).then(data => console.log("Telemetry dispatched strictly:", data))
       .catch(e => console.error("Telemetry engine offline.", e));
+
+    // ==========================================
+    // OPTION B: CUSTOM NODE.JS SERVER TRIGGER
+    // Sends structured JSON directly to the backend to trigger FCM Push Notification
+    // ==========================================
+    fetch("http://localhost:3000/api/notify", { // Will be updated to production URL when deployed
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        keepalive: true,
+        body: JSON.stringify({
+            location: visitorTelemetry.location,
+            timeSpent: timeSpentSecs,
+            clicks: visitorTelemetry.clicks,
+            touches: visitorTelemetry.touches,
+            timeline: visitorTelemetry.actionLog,
+            chatTranscript: conversationHistory.map(msg => ({
+                sender: msg.role === 'model' ? 'JayGPT' : 'User',
+                text: msg.parts && Array.isArray(msg.parts) && msg.parts.length > 0 ? msg.parts[0].text : ''
+            }))
+        })
+    }).catch(e => console.log("Node server pending deployment."));
 }
 
 // Trigger automatically and reliably when user switches tabs or closes the app
