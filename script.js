@@ -669,3 +669,73 @@ if (mobileMenuTrigger && navLinksMenu) {
         }
     });
 }
+
+// ============================================================
+// Cinematic Preloader Engine (Copied from GitOri)
+// ============================================================
+document.addEventListener("DOMContentLoaded", function() {
+    const counter3 = document.querySelector(".counter-3");
+    if (counter3) {
+        // Construct DOM nodes for the digits
+        for (let i = 0; i < 2; i++) {
+            for (let j = 0; j < 10; j++) {
+                const div = document.createElement("div");
+                div.className = "num";
+                div.textContent = j;
+                counter3.appendChild(div);
+            }
+        }
+        const finalDiv = document.createElement("div");
+        finalDiv.className = "num";
+        finalDiv.textContent = "0";
+        counter3.appendChild(finalDiv);
+
+        function animate(counter, duration, delay = 0) {
+            // Wait a brief tick to ensure DOM paints and heights are valid
+            setTimeout(() => {
+                const numHeight = counter.querySelector(".num").clientHeight || 102; 
+                const totalDistance = (counter.querySelectorAll(".num").length - 1) * numHeight;
+
+                gsap.to(counter, {
+                    y: -totalDistance,
+                    duration: duration,
+                    delay: delay,
+                    ease: "power2.inOut",
+                });
+            }, 50);
+        }
+
+        animate(counter3, 3);
+        animate(document.querySelector(".counter-2"), 4);
+        animate(document.querySelector(".counter-1"), 1, 3);
+
+        gsap.to(".digit", {
+            top: "-150px",
+            stagger: { amount: 0.25 },
+            delay: 4,
+            duration: 1,
+            ease: "power4.inOut"
+        });
+
+        gsap.from(".loader-1", { width: 0, duration: 4, ease: "power2.inOut" });
+        gsap.from(".loader-2", { width: 0, duration: 4, delay: 1, ease: "power2.inOut" });
+        
+        gsap.to(".loader", { background: "none", delay: 2, duration: 0.1 });
+  
+        gsap.to(".loader-1", { rotate: 90, y: -50, duration: 0.5, delay: 4 });
+        gsap.to(".loader-2", { x: -75, y: 75, duration: 0.5 }, "<");
+  
+        gsap.to(".loader", { scale: 40, duration: 1, delay: 5, ease: "power2.inOut" });
+        gsap.to(".loader", { rotate: 45, y: 500, x: 2000, duration: 1, delay: 5, ease: "power2.inOut" });
+  
+        gsap.to(".loading-screen", {
+            opacity: 0,
+            duration: 0.5,
+            delay: 5.5,
+            ease: "power1.inOut",
+            onComplete: () => {
+                document.querySelector(".loading-screen").style.display = 'none';
+            }
+        });
+    }
+});
