@@ -137,6 +137,99 @@ chatInput.addEventListener('input', () => {
     chatSubmit.disabled = chatInput.value.trim() === '';
 });
 
+// ============================================================
+// ZERO-COST SEMANTIC CACHING ENGINE
+// ============================================================
+const localCacheEngine = {
+    isShortQuery(query) {
+        return query.split(' ').length <= 4;
+    },
+    rules: [
+        {
+            topic: 'greeting',
+            matches: /^(hi|hello|hey|greetings|morning|afternoon|evening|wassup|yo)$/i,
+            answer: (isShort) => isShort ? "Hello! How can I help you?" : "Hello there! I'm JayGPT. How can I assist you in learning more about Jay's background?"
+        },
+        {
+            topic: 'skills_short',
+            matches: /^(skills|tech stack|technologies|tools)$/i,
+            answer: () => "Core Stack: Docker, Kubernetes, AWS, PostgreSQL, React, Node.js, Ruby, Python. AI/ML specialization."
+        },
+        {
+            topic: 'skills_broad',
+            matches: /(skill|technology|stack|language|framework|tools|docker|react|python|machine learning|java|c\+\+)/i,
+            answer: (isShort) => isShort 
+                ? "He specializes in Docker, Kubernetes, AWS, PostgreSQL, React, Ruby, and AI/ML systems." 
+                : "Jay has a robust technical stack. On the infrastructure side, he excels with Docker, Kubernetes, and AWS. For development, he is highly proficient in React, Node.js, Python, and Ruby—with specialized expertise in Machine Learning algorithms."
+        },
+        {
+            topic: 'experience_samsung',
+            matches: /(samsung)/i,
+            answer: (isShort) => isShort
+                ? "Senior Software Developer at Samsung (2022-2025). Built Android UIs & researched ML security."
+                : "Jay spent three impactful years at Samsung R&D (2022-2025) starting as a Software Engineer and being promoted to Senior Software Developer. He architected seamless Android UIs, implemented statistical ML models for churn calculation, and researched Machine Learning to augment smartphone security."
+        },
+        {
+            topic: 'experience_servicenow',
+            matches: /(servicenow|service now)/i,
+            answer: (isShort) => isShort
+                ? "Current Software Engineer at ServiceNow building Digital Employee Experience workflows."
+                : "Currently, Jay is a Software Engineer at ServiceNow. He architectures automated remedial actions for macOS/Windows, writes cross-platform definitions in Ruby, and builds scalable bulk-remote workflows into the ITSM ecosystem."
+        },
+        {
+            topic: 'experience_broad',
+            matches: /(work|experience|job|employment|career|worked|history)/i,
+            answer: (isShort) => isShort
+                ? "Currently at ServiceNow. Previously Senior Dev at Samsung R&D. Highly experienced in Full Stack & ML."
+                : "Jay has an exceptional career trajectory. He is currently scaling Digital Employee Experience workflows as a Software Engineer at ServiceNow. Prior to this, he spent three years at Samsung R&D as a Senior Software Developer, where he designed Android UIs and spearheaded ML smartphone security research."
+        },
+        {
+            topic: 'education_srm',
+            matches: /(education|study|degree|university|college|srm|graduated|cgpa|bachelors|b.tech)/i,
+            answer: (isShort) => isShort
+                ? "B.Tech in CS (Machine Learning & AI) from SRM University. Stellar 9.1 CGPA."
+                : "Jay holds a Bachelor's Degree in Computer Science Engineering from SRM University. He specialized rigorously in Machine Learning and Artificial Intelligence, graduating with an outstanding 9.1 CGPA."
+        },
+        {
+            topic: 'contact',
+            matches: /(contact|email|phone|reach|number|hire|resume|cv)/i,
+            answer: () => "You can reach Jay directly at namgirijayvinay@gmail.com or call him at +91 9492132662. Feel free to connect on LinkedIn too!"
+        },
+        {
+            topic: 'projects',
+            matches: /(project|portfolio|built|made|netflix|sudoku|smart mirror)/i,
+            answer: (isShort) => isShort
+                ? "Key projects include an ML Visualization platform, Netflix clone, Smart Mirror, and Sudoku Solver."
+                : "Jay has built an impressive portfolio of projects ranging from a full-stack Netflix clone and a mobile multi-app food delivery system, to complex PyQt Algorithms Visualization tools and hardware integrations like a Spotify-synced Smart Mirror."
+        },
+        {
+            topic: 'research',
+            matches: /(publication|research|paper|wiley|ieee|published)/i,
+            answer: (isShort) => isShort
+                ? "Published research in IEEE (Autoencoders, YOLOv7) and a chapter in Wiley Publications (Unsupervised Learning)."
+                : "Jay is an active researcher. He has published a chapter on Unsupervised Learning in Bioinformatics with Wiley, and presented impactful IEEE papers covering Autoencoders for Fashion-MNIST and YOLOv7 models for Mudra gesture detection."
+        },
+        {
+            topic: 'certifications',
+            matches: /(certificate|certification|certified|award)/i,
+            answer: (isShort) => isShort
+                ? "Holds a Samsung Excellence Award, Google Cloud certifications, and AI specs from Stanford and DeepLearning.AI."
+                : "He is highly certified, holding a Samsung Excellence Award (2024), a Google Cloud Facilitator status, along with rigorous Machine Learning specializations from Stanford University, DeepLearning.AI, and Microsoft Azure."
+        }
+    ],
+    process(query) {
+        const cleanQuery = query.trim();
+        if (!cleanQuery) return null;
+        const isShort = this.isShortQuery(cleanQuery);
+        for (let rule of this.rules) {
+            if (rule.matches.test(cleanQuery)) {
+                return rule.answer(isShort);
+            }
+        }
+        return null; // Fallback to Gemini API
+    }
+};
+
 // --- Chat Logic ---
 chatForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -157,21 +250,37 @@ window.submitMessage = async function(text) {
     // Trigger an initial smooth scroll to get past the welcome dashboard
     chatBody.scrollTo({top: chatBody.scrollHeight, behavior: 'smooth'});
 
-    if (!GEMINI_API_KEY) {
-        appendMessage("Error: API Key is missing. Please set it in the config file.", 'system');
-        return;
-    }
-
     // 2. Add Typing Indicator & Play video to simulate thinking
     const typingId = showTypingIndicator();
     if (aiVideo) {
         aiVideo.play();
     }
 
-    // 3. Update Conversation History Format for Gemini API
+    // 3. Update Conversation History Format for Telemetry & API
     conversationHistory.push({"role": "user", "parts": [{"text": text}]});
 
-    // 4. Fetch Response from API
+    // 4. INTERCEPT VIA ZERO-COST LOCAL CACHE
+    const cachedResponse = localCacheEngine.process(text);
+    if (cachedResponse) {
+        // We found a semantic cache hit! Simulate network latency (300-800ms)
+        setTimeout(() => {
+            document.getElementById(typingId).remove();
+            conversationHistory.push({"role": "model", "parts": [{"text": cachedResponse}]});
+            appendMessage(cachedResponse, 'bot', true);
+        }, Math.random() * 500 + 300);
+        return; // EXACTLY ZERO TOKENS BURNED!
+    }
+
+    if (!GEMINI_API_KEY) {
+        document.getElementById(typingId).remove();
+        if (aiVideo) aiVideo.pause();
+        appendMessage("Error: API Key is missing. Please set it in the config file.", 'system');
+        // Pop the user message so history isn't borked
+        conversationHistory.pop();
+        return;
+    }
+
+    // 5. Fetch Response from API (Cache Missed)
     try {
         const responseText = await fetchGeminiResponse(conversationHistory);
         
@@ -424,3 +533,79 @@ if (greetingText) {
     
     greetingText.textContent = timeGreeting;
 }
+
+// ============================================================
+// VISITOR TELEMETRY & REPORTING SYSTEM
+// ============================================================
+const visitorTelemetry = {
+    startTime: Date.now(),
+    clicks: 0,
+    touches: 0,
+    reportSent: false
+};
+
+// Track interactions universally across the app
+window.addEventListener('click', () => visitorTelemetry.clicks++);
+window.addEventListener('touchstart', () => visitorTelemetry.touches++);
+
+// Dispatch logic triggering once per true session
+function dispatchTelemetryReport() {
+    if (visitorTelemetry.reportSent) return;
+
+    const timeSpentSecs = Math.floor((Date.now() - visitorTelemetry.startTime) / 1000);
+    
+    // Determine if visitor is meaningful (spent time, clicked around, or specifically used chat)
+    const isMeaningful = timeSpentSecs > 10 || visitorTelemetry.clicks > 2 || conversationHistory.length > 0;
+    if (!isMeaningful) return;
+
+    visitorTelemetry.reportSent = true;
+
+    // Parse conversation history safely
+    let chatLogHtml = "<i>No chat messages were sent during this session.</i>";
+    if (conversationHistory && conversationHistory.length > 0) {
+        chatLogHtml = conversationHistory.map(msg => {
+            const sender = msg.role === 'model' ? '<b style="color:#007BFF">JayGPT</b>' : '<b style="color:#28A745">User</b>';
+            const text = msg.parts && Array.isArray(msg.parts) && msg.parts.length > 0 ? msg.parts[0].text : '';
+            return `<div style="margin-bottom: 16px; border-bottom: 1px solid #f1f1f1; padding-bottom: 8px;">${sender}:<br><span style="color:#333; line-height: 1.5;">${text}</span></div>`;
+        }).join("");
+    }
+
+    // Build the high-quality HTML Email payload
+    const emailBody = `
+        <div style="font-family: -apple-system, sans-serif; padding: 20px; color:#222; max-width: 600px;">
+            <h2 style="color: #111;">Portfolio Telemetry Report</h2>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0;">
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><b>⏱ Time Spent:</b> ${timeSpentSecs} seconds</p>
+                <p style="margin: 0 0 10px 0; font-size: 16px;"><b>🖱 Clicks:</b> ${visitorTelemetry.clicks}</p>
+                <p style="margin: 0 0 0 0; font-size: 16px;"><b>👆 Touches:</b> ${visitorTelemetry.touches}</p>
+            </div>
+            
+            <h3 style="color: #111; margin-bottom: 12px;">Chat Transcript</h3>
+            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px;">
+                ${chatLogHtml}
+            </div>
+        </div>
+    `;
+
+    // Fire network beacon payload to FormSubmit securely
+    fetch("https://formsubmit.co/ajax/jayvinay.ml@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        keepalive: true, // Guarantees dispatch even as tab strictly closes
+        body: JSON.stringify({
+            _subject: `New Portfolio Visitor Report (${timeSpentSecs}s) | ${conversationHistory.length > 0 ? '💬 Chatted' : '👀 Browsed'}`,
+            _replyto: "no-reply@jayvinay.com",
+            telemetry_data: emailBody
+        })
+    }).catch(e => console.log("Telemetry engine offline.", e));
+}
+
+// Trigger automatically and reliably when user switches tabs or closes the app
+document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+        dispatchTelemetryReport();
+    }
+});
