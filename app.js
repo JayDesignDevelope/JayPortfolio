@@ -300,7 +300,7 @@ window.submitMessage = async function(text) {
         }
         
         if (error.message.includes("429")) {
-            appendMessage("JayGPT is currently taking a rest due to high traffic! Please try again later or reach out to Jay directly at contact@jayvinay.in.", 'system');
+            appendMessage("JayGPT is currently taking a rest due to high traffic! Please try again later or reach out to Jay directly at namgirijayvinay@gmail.com", 'system');
         } else {
             console.error(error);
             appendMessage(`Connection Error: ${error.message} (Check Console for details)`, 'system');
@@ -535,20 +535,49 @@ if (greetingText) {
 }
 
 // ============================================================
-// VISITOR TELEMETRY & REPORTING SYSTEM
+// ADVANCED VISITOR TELEMETRY & REPORTING SYSTEM
 // ============================================================
 const visitorTelemetry = {
     startTime: Date.now(),
     clicks: 0,
     touches: 0,
+    actionLog: [],
+    location: "Fetching...",
     reportSent: false
 };
 
-// Track interactions universally across the app
-window.addEventListener('click', () => visitorTelemetry.clicks++);
+// 1. Invisible IP Location Fetching
+fetch('https://ipapi.co/json/')
+    .then(res => res.json())
+    .then(data => {
+        if(data.city && data.country_name) {
+            visitorTelemetry.location = `${data.city}, ${data.region}, ${data.country_name} (ISP: ${data.org})`;
+        } else {
+            visitorTelemetry.location = "Location Data Unavailable";
+        }
+    })
+    .catch(() => visitorTelemetry.location = "Fetch Blocked/Failed");
+
+// 2. Track interactions universally across the app
+window.addEventListener('click', (e) => {
+    visitorTelemetry.clicks++;
+    
+    // Check if they clicked a button, link, or project card
+    const interactiveEl = e.target.closest('button, a, .bento-card');
+    if (interactiveEl) {
+        let label = interactiveEl.innerText ? interactiveEl.innerText.substring(0, 30).trim() : interactiveEl.id;
+        if (!label) label = "Icon/Unknown Element";
+        
+        label = label.replace(/\n/g, ' '); // Clean newlines
+        
+        const secondsIn = Math.floor((Date.now() - visitorTelemetry.startTime) / 1000);
+        visitorTelemetry.actionLog.push(`[${secondsIn}s] Clicked: "${label}"`);
+    }
+});
+
 window.addEventListener('touchstart', () => visitorTelemetry.touches++);
 
-// Dispatch logic triggering once per true session
+// 3. Dispatch logic triggering once per true session
 function dispatchTelemetryReport() {
     if (visitorTelemetry.reportSent) return;
 
@@ -560,47 +589,44 @@ function dispatchTelemetryReport() {
 
     visitorTelemetry.reportSent = true;
 
-    // Parse conversation history safely
-    let chatLogHtml = "<i>No chat messages were sent during this session.</i>";
+    // Build plain text Chat Log
+    let chatLogText = "No chat messages were sent during this session.";
     if (conversationHistory && conversationHistory.length > 0) {
-        chatLogHtml = conversationHistory.map(msg => {
-            const sender = msg.role === 'model' ? '<b style="color:#007BFF">JayGPT</b>' : '<b style="color:#28A745">User</b>';
+        chatLogText = conversationHistory.map(msg => {
+            const sender = msg.role === 'model' ? 'JayGPT' : 'User';
             const text = msg.parts && Array.isArray(msg.parts) && msg.parts.length > 0 ? msg.parts[0].text : '';
-            return `<div style="margin-bottom: 16px; border-bottom: 1px solid #f1f1f1; padding-bottom: 8px;">${sender}:<br><span style="color:#333; line-height: 1.5;">${text}</span></div>`;
-        }).join("");
+            return `${sender}: "${text}"`;
+        }).join("\n\n");
     }
 
-    // Build the high-quality HTML Email payload
-    const emailBody = `
-        <div style="font-family: -apple-system, sans-serif; padding: 20px; color:#222; max-width: 600px;">
-            <h2 style="color: #111;">Portfolio Telemetry Report</h2>
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid #e2e8f0;">
-                <p style="margin: 0 0 10px 0; font-size: 16px;"><b>⏱ Time Spent:</b> ${timeSpentSecs} seconds</p>
-                <p style="margin: 0 0 10px 0; font-size: 16px;"><b>🖱 Clicks:</b> ${visitorTelemetry.clicks}</p>
-                <p style="margin: 0 0 0 0; font-size: 16px;"><b>👆 Touches:</b> ${visitorTelemetry.touches}</p>
-            </div>
-            
-            <h3 style="color: #111; margin-bottom: 12px;">Chat Transcript</h3>
-            <div style="background: #ffffff; border: 1px solid #e2e8f0; padding: 20px; border-radius: 12px;">
-                ${chatLogHtml}
-            </div>
-        </div>
-    `;
+    // Build timeline log
+    let timelineText = "No specific buttons clicked.";
+    if (visitorTelemetry.actionLog.length > 0) {
+        timelineText = visitorTelemetry.actionLog.join("\n- ");
+        timelineText = "- " + timelineText;
+    }
+
+    // Build the payload natively as URLSearchParams to BYPASS strict CORS preflight on localhosts
+    const formData = new URLSearchParams();
+    formData.append('_subject', `New Visitor (${timeSpentSecs}s) | ${conversationHistory.length > 0 ? '💬 Chatted' : '👀 Browsed'}`);
+    formData.append('_replyto', 'no-reply@jayvinay.com');
+    formData.append('_template', 'box');
+    formData.append('Visitor_Location', visitorTelemetry.location);
+    formData.append('Engagement_Metrics', `${timeSpentSecs} seconds | ${visitorTelemetry.clicks} Clicks | ${visitorTelemetry.touches} Touches`);
+    formData.append('Interaction_Timeline', timelineText);
+    formData.append('Chat_Transcript', chatLogText);
 
     // Fire network beacon payload to FormSubmit securely
+    // By passing URLSearchParams we trigger a Simple Request, skipping the CORS OPTIONS block
     fetch("https://formsubmit.co/ajax/jayvinay.ml@gmail.com", {
         method: "POST",
         headers: { 
-            'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
         keepalive: true, // Guarantees dispatch even as tab strictly closes
-        body: JSON.stringify({
-            _subject: `New Portfolio Visitor Report (${timeSpentSecs}s) | ${conversationHistory.length > 0 ? '💬 Chatted' : '👀 Browsed'}`,
-            _replyto: "no-reply@jayvinay.com",
-            telemetry_data: emailBody
-        })
-    }).catch(e => console.log("Telemetry engine offline.", e));
+        body: formData
+    }).then(res => res.json()).then(data => console.log("Telemetry dispatched strictly:", data))
+      .catch(e => console.error("Telemetry engine offline.", e));
 }
 
 // Trigger automatically and reliably when user switches tabs or closes the app
@@ -609,3 +635,18 @@ document.addEventListener('visibilitychange', () => {
         dispatchTelemetryReport();
     }
 });
+
+// Fallback for reload/classic browser exits
+window.addEventListener('beforeunload', () => {
+    dispatchTelemetryReport();
+});
+
+// DEBUG HELPER: Run window.forceTestEmail() in your browser console to test instantly!
+window.forceTestEmail = function() {
+    console.log("Forcing Telemetry Dispatch. Bypassing timer checks...");
+    visitorTelemetry.reportSent = false; // Reset block
+    visitorTelemetry.clicks = Math.max(visitorTelemetry.clicks, 5); // Fake meaningful
+    visitorTelemetry.startTime = Date.now() - 20000; // Fake 20 seconds passed
+    dispatchTelemetryReport();
+    console.log("Dispatch fired! Check your Network tab to see the FormSubmit POST status.");
+};
