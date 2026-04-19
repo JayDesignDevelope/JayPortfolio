@@ -1,28 +1,7 @@
 // --- API KEY CONFIGURATION ---
 // In a full production env without exposing keys to public, you'd route this via an edge function.
 // But as per the free $0 strategy, even if exposed on a static site, rate limits protect from charges.
-let GEMINI_API_KEY = "";
-
-// Dynamically fetch and parse the .env file
-async function initializeEnv() {
-    try {
-        const response = await fetch('.env');
-        const text = await response.text();
-        const lines = text.split('\n');
-        
-        lines.forEach(line => {
-            const split = line.split('=');
-            if (split.length >= 2 && split[0].trim() === 'GEMINI_API_KEY') {
-                // Remove potential quotes or whitespace
-                GEMINI_API_KEY = split.slice(1).join('=').trim().replace(/['"]+/g, '');
-            }
-        });
-    } catch (err) {
-        console.warn("Could not load .env file. Ensure you are running on a local server, not the file:// protocol.", err);
-    }
-}
-// Initialize synchronously to ensure it completes immediately upon page load
-initializeEnv();
+let GEMINI_API_KEY = CONFIG.GEMINI_API_KEY;
 
 // System Prompt for Anti-Hallucination
 const SYSTEM_INSTRUCTION = `You are JayGPT, the personalized AI assistant for Jaya Vinay Namgiri. 
