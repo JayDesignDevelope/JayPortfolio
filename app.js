@@ -632,7 +632,7 @@ function dispatchTelemetryReport() {
     // OPTION B: CUSTOM NODE.JS SERVER TRIGGER
     // Sends structured JSON directly to the backend to trigger FCM Push Notification
     // ==========================================
-    fetch("http://localhost:3000/api/notify", { // Will be updated to production URL when deployed
+    fetch("https://jayportfolio-backend-5ebo.onrender.com/api/notify", { // Live Render Production Endpoint
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
