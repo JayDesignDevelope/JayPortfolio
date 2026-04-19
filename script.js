@@ -546,15 +546,21 @@ const certLightboxBg = document.getElementById('cert-lightbox-close-bg');
 const certLightboxImg = document.getElementById('cert-lightbox-img');
 
 if (certContainer && typeof gsap !== 'undefined') {
-    // Exact valid indexes derived from your V2 portfolio filesystem
-    const certIndexes = [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23];
+    // Gather all valid variations explicitly across the 3 sub-directories
+    const allCertFiles = [
+        ...[1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12, 15, 16, 17, 18, 19, 20, 21, 22, 23].map(i => `jpgs/img${i}.jpg`),
+        ...[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(i => `png/img${i}.png`),
+        ...[13, 14, 15, 16, 17, 18, 19, 20, 21].map(i => `png_additional/img${i}.png`)
+    ];
+    
     let certTweens = [];
     let isGridMode = false;
 
     // Inject Image DOM Nodes dynamically
-    certIndexes.forEach(index => {
+    allCertFiles.forEach(subPath => {
         const img = document.createElement('img');
-        img.src = `../JayPortfolio/assets/scrible/jpgs/img${index}.jpg`;
+        // Bound directly to the root assets relative path to ensure clean staging
+        img.src = `assets/scrible/${subPath}`;
         img.className = 'cert-item';
         
         // Random Initial Scatter mapped cleanly to interior bounds avoiding hard edges
