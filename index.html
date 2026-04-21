@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jay Portfolio</title>
-    
+
     <!-- Branding & Meta Properties -->
     <link rel="shortcut icon" href="assets/favicon_io/favicon.ico" type="image/x-icon">
     <meta property="og:title" content="Jay Portfolio">
@@ -14,10 +14,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Highlight.js for code block parsing -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -30,32 +31,32 @@
 <body>
     <!-- Cinematic Preloader (Replicated from GitOri) -->
     <div class="loading-screen" style="z-index: 1000000; background-color: #000000;">
-      <div class="loader">
-        <div class="loader-1 bar"></div>
-        <div class="loader-2 bar"></div>
-      </div>
-      <div class="counter">
-        <div class="counter-1 digit">
-          <div class="num">0</div>
-          <div class="num num1offset1">1</div>
+        <div class="loader">
+            <div class="loader-1 bar"></div>
+            <div class="loader-2 bar"></div>
         </div>
-        <div class="counter-2 digit">
-          <div class="num">0</div>
-          <div class="num num1offset2">1</div>
-          <div class="num">2</div>
-          <div class="num">3</div>
-          <div class="num">4</div>
-          <div class="num">5</div>
-          <div class="num">6</div>
-          <div class="num">7</div>
-          <div class="num">8</div>
-          <div class="num">9</div>
-          <div class="num">0</div>
+        <div class="counter">
+            <div class="counter-1 digit">
+                <div class="num">0</div>
+                <div class="num num1offset1">1</div>
+            </div>
+            <div class="counter-2 digit">
+                <div class="num">0</div>
+                <div class="num num1offset2">1</div>
+                <div class="num">2</div>
+                <div class="num">3</div>
+                <div class="num">4</div>
+                <div class="num">5</div>
+                <div class="num">6</div>
+                <div class="num">7</div>
+                <div class="num">8</div>
+                <div class="num">9</div>
+                <div class="num">0</div>
+            </div>
+            <div class="counter-3 digit">
+                <!-- Dynamically populated by Matter JS / GSAP Loader script -->
+            </div>
         </div>
-        <div class="counter-3 digit">
-          <!-- Dynamically populated by Matter JS / GSAP Loader script -->
-        </div>
-      </div>
     </div>
 
     <div class="app-container">
@@ -90,9 +91,9 @@
                     </div>
 
                     <div class="resume-download-section">
-                        <h4>PROFESSIONAL TOOLKIT</h4>
-                        <p class="download-desc">Unlock my full professional toolkit. Download my detailed Resumé to explore my end-to-end expertise in AI and Software Engineering.</p>
-                        
+                        <h4>THE FULL PICTURE</h4>
+                        <p class="download-desc">Skills, experience, and everything in between. Download my resume and
+                            see what I bring to the table.</p>
                         <div class="download-pill-wrapper">
                             <button id="resume-download-btn" class="glass-download-btn">
                                 <div class="btn-content">
@@ -101,80 +102,86 @@
                                 </div>
                                 <!-- Interactive Elements for GSAP Animation -->
                                 <svg class="btn-loader-ring" viewBox="0 0 50 50">
-                                    <circle class="ring-path" cx="25" cy="25" r="20" fill="none" stroke-width="4"></circle>
+                                    <circle class="ring-path" cx="25" cy="25" r="20" fill="none" stroke-width="4">
+                                    </circle>
                                 </svg>
                                 <div class="btn-success">
                                     <i class="ph-bold ph-check"></i>
                                 </div>
                             </button>
                             <!-- Hidden Anchor to trigger actual download -->
-                            <a id="hidden-resume-trigger" href="resume/Jaya%20Vinay%20Namgiri%202026.pdf" download="Jaya_Vinay_Namgiri_Resume.pdf" style="display:none;"></a>
+                            <a id="hidden-resume-trigger" href="resume/Jaya%20Vinay%20Namgiri%202026.pdf"
+                                download="Jaya_Vinay_Namgiri_Resume.pdf" style="display:none;"></a>
                         </div>
                     </div>
                 </aside>
-                
+
                 <div class="home-hero-bg">
-                <div class="hero-left">
-                    <h1 class="stagger-up">Digital<br><span class="typewriter-text">DIGITAL.</span><span class="typewriter-cursor">|</span></h1>
-                    <p class="stagger-up">From web design and development to digital marketing strategies, we craft
-                        tailored solutions to drive your online success.</p>
+                    <div class="hero-left">
+                        <h1 class="stagger-up">Digital<br><span class="typewriter-text">DIGITAL.</span><span
+                                class="typewriter-cursor">|</span></h1>
+                       <p class="stagger-up">From AI-powered applications and scalable backend systems to clean, responsive interfaces — crafted with precision, driven by curiosity.</p>        
+                    </div>
 
-                </div>
+                    <!-- The Glass Widget Container -->
+                    <div id="inline-chat-container" class="inline-chat-wrapper">
+                        <!-- Initially put the modal straight into the container -->
+                        <div class="jaygpt-modal active inline-mode" id="chatbot-modal">
 
-                <!-- The Glass Widget Container -->
-                <div id="inline-chat-container" class="inline-chat-wrapper">
-                    <!-- Initially put the modal straight into the container -->
-                    <div class="jaygpt-modal active inline-mode" id="chatbot-modal">
-
-                        <!-- Floating Avatar Orb — overflows above the card -->
-                        <div class="ai-banner">
-                            <div class="video-zoom-wrapper">
-                                <video id="ai-video" src="ai.mp4" playsinline loop muted class="ai-banner-video"></video>
-                            </div>
-                            <div class="ai-status"><h2></h2></div>
-                        </div>
-
-                        <!-- Close button (shown in fixed/floating mode) -->
-                        <button class="jaygpt-close" id="chatbot-close">
-                            <i class="ph-bold ph-x"></i>
-                        </button>
-
-                        <!-- Chat Body -->
-                        <div class="jaygpt-body" id="chat-body">
-                            <!-- Welcome Screen -->
-                            <div class="welcome-screen" id="welcome-screen">
-                                <h1 class="apple-heading" id="greeting-text">Good morning.</h1>
-                                <p class="apple-subtext">How can I help you learn about Jay today?</p>
-
-                                <!-- Dynamic Sample Prompts -->
-                                <div class="sample-prompts-carousel">
-                                    <div class="prompt-pill" id="dynamic-prompt-pill" onclick="submitMessage('What are his core technical skills?')">
-                                        <span id="prompt-pill-text">What are his core technical skills?</span>
-                                        <i class="ph-bold ph-arrow-right"></i>
-                                    </div>
+                            <!-- Floating Avatar Orb — overflows above the card -->
+                            <div class="ai-banner">
+                                <div class="video-zoom-wrapper">
+                                    <video id="ai-video" src="ai.mp4" playsinline loop muted
+                                        class="ai-banner-video"></video>
+                                </div>
+                                <div class="ai-status">
+                                    <h2></h2>
                                 </div>
                             </div>
 
-                            <!-- Messages Container -->
-                            <div class="messages-container" id="messages-container"></div>
-                        </div>
+                            <!-- Close button (shown in fixed/floating mode) -->
+                            <button class="jaygpt-close" id="chatbot-close">
+                                <i class="ph-bold ph-x"></i>
+                            </button>
 
-                        <!-- Input Area -->
-                        <div class="jaygpt-footer">
-                            <form id="chat-form" class="modern-input-form">
-                                <input type="text" id="chat-input" placeholder="Message JayGPT..." autocomplete="off">
-                                <button type="submit" id="chat-submit" disabled>
-                                    <i class="ph-bold ph-arrow-up"></i>
-                                </button>
-                            </form>
-                            <p class="footer-disclaimer">JayGPT can make mistakes.</p>
+                            <!-- Chat Body -->
+                            <div class="jaygpt-body" id="chat-body">
+                                <!-- Welcome Screen -->
+                                <div class="welcome-screen" id="welcome-screen">
+                                    <h1 class="apple-heading" id="greeting-text">Good morning.</h1>
+                                    <p class="apple-subtext">How can I help you learn about Jay today?</p>
+
+                                    <!-- Dynamic Sample Prompts -->
+                                    <div class="sample-prompts-carousel">
+                                        <div class="prompt-pill" id="dynamic-prompt-pill"
+                                            onclick="submitMessage('What are his core technical skills?')">
+                                            <span id="prompt-pill-text">What are his core technical skills?</span>
+                                            <i class="ph-bold ph-arrow-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Messages Container -->
+                                <div class="messages-container" id="messages-container"></div>
+                            </div>
+
+                            <!-- Input Area -->
+                            <div class="jaygpt-footer">
+                                <form id="chat-form" class="modern-input-form">
+                                    <input type="text" id="chat-input" placeholder="Message JayGPT..."
+                                        autocomplete="off">
+                                    <button type="submit" id="chat-submit" disabled>
+                                        <i class="ph-bold ph-arrow-up"></i>
+                                    </button>
+                                </form>
+                                <p class="footer-disclaimer">JayGPT can make mistakes.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Trigger DOM moved to body root -->
+                    <!-- Trigger DOM moved to body root -->
 
-                <!-- JayGPT DOM moved to body root -->
+                    <!-- JayGPT DOM moved to body root -->
                 </div>
             </section>
 
@@ -214,19 +221,25 @@
                                     <span class="tlc-period">Aug 2025 — Present</span>
                                 </div>
                                 <h3 class="tlc-title">Software Engineer</h3>
-                                <p class="tlc-org"><i class="ph ph-building-office"></i> ServiceNow &nbsp;·&nbsp; Hyderabad, India</p>
-                                <p class="tlc-summary">Architecting automated remedial actions for enterprise endpoint management across Windows &amp; macOS.</p>
+                                <p class="tlc-org"><i class="ph ph-building-office"></i> ServiceNow &nbsp;·&nbsp;
+                                    Hyderabad, India</p>
+                                <p class="tlc-summary">Architecting automated remedial actions for enterprise endpoint
+                                    management across Windows &amp; macOS.</p>
                             </div>
                             <div class="tl-detail-card">
                                 <p class="tlc-section-label"><i class="ph-bold ph-lightning"></i> Key Achievements</p>
                                 <ul>
-                                    <li>Built 30+ cross-platform check scripts in Ruby covering 50k+ managed endpoints</li>
+                                    <li>Built 30+ cross-platform check scripts in Ruby covering 50k+ managed endpoints
+                                    </li>
                                     <li>Engineered ACC workflows reducing ticket resolution time by 40%</li>
                                     <li>Automated macOS &amp; Windows remediation integrated into ITSM lifecycle</li>
                                     <li>Zero-downtime CI/CD deployments across all environments</li>
                                 </ul>
-                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i> Tech Stack</p>
-                                <div class="tlc-tags"><span>Ruby</span><span>ServiceNow</span><span>ITSM</span><span>Cloud Infra</span><span>CI/CD</span></div>
+                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i>
+                                    Tech Stack</p>
+                                <div class="tlc-tags">
+                                    <span>Ruby</span><span>ServiceNow</span><span>ITSM</span><span>Cloud
+                                        Infra</span><span>CI/CD</span></div>
                             </div>
                         </div>
                     </div>
@@ -247,8 +260,10 @@
                                     <span class="tlc-period">Sept 2023 — Aug 2025</span>
                                 </div>
                                 <h3 class="tlc-title">Senior Software Developer</h3>
-                                <p class="tlc-org"><i class="ph ph-building-office"></i> Samsung R&amp;D &nbsp;·&nbsp; Bengaluru, India</p>
-                                <p class="tlc-summary">Designing Android UIs and researching ML-driven security systems for Samsung's flagship devices.</p>
+                                <p class="tlc-org"><i class="ph ph-building-office"></i> Samsung R&amp;D &nbsp;·&nbsp;
+                                    Bengaluru, India</p>
+                                <p class="tlc-summary">Designing Android UIs and researching ML-driven security systems
+                                    for Samsung's flagship devices.</p>
                             </div>
                             <div class="tl-detail-card">
                                 <p class="tlc-section-label"><i class="ph-bold ph-lightning"></i> Key Achievements</p>
@@ -258,8 +273,10 @@
                                     <li>Prototyped Gen AI chat assistant natively in Android launcher</li>
                                     <li>Mentored 3 junior developers &amp; led Android Guild sessions</li>
                                 </ul>
-                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i> Tech Stack</p>
-                                <div class="tlc-tags"><span>Java</span><span>Android SDK</span><span>TensorFlow Lite</span><span>Gen AI</span><span>Kotlin</span></div>
+                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i>
+                                    Tech Stack</p>
+                                <div class="tlc-tags"><span>Java</span><span>Android SDK</span><span>TensorFlow
+                                        Lite</span><span>Gen AI</span><span>Kotlin</span></div>
                             </div>
                         </div>
                     </div>
@@ -280,8 +297,10 @@
                                     <span class="tlc-period">Aug 2022 — Sept 2023</span>
                                 </div>
                                 <h3 class="tlc-title">Software Engineer</h3>
-                                <p class="tlc-org"><i class="ph ph-building-office"></i> Samsung R&amp;D &nbsp;·&nbsp; Bengaluru, India</p>
-                                <p class="tlc-summary">Building intelligent analytics dashboards and ML churn prediction models for Samsung's consumer data platform.</p>
+                                <p class="tlc-org"><i class="ph ph-building-office"></i> Samsung R&amp;D &nbsp;·&nbsp;
+                                    Bengaluru, India</p>
+                                <p class="tlc-summary">Building intelligent analytics dashboards and ML churn prediction
+                                    models for Samsung's consumer data platform.</p>
                             </div>
                             <div class="tl-detail-card">
                                 <p class="tlc-section-label"><i class="ph-bold ph-lightning"></i> Key Achievements</p>
@@ -291,8 +310,10 @@
                                     <li>Automated ETL pipelines reducing data latency from 6hrs to 20 min</li>
                                     <li>Presented quarterly BI insights to senior leadership</li>
                                 </ul>
-                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i> Tech Stack</p>
-                                <div class="tlc-tags"><span>Python</span><span>SQL</span><span>Apache Superset</span><span>Sklearn</span><span>ETL</span></div>
+                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i>
+                                    Tech Stack</p>
+                                <div class="tlc-tags"><span>Python</span><span>SQL</span><span>Apache
+                                        Superset</span><span>Sklearn</span><span>ETL</span></div>
                             </div>
                         </div>
                     </div>
@@ -313,8 +334,10 @@
                                     <span class="tlc-period">2018 — 2022</span>
                                 </div>
                                 <h3 class="tlc-title">B.Tech — Computer Science &amp; Engineering</h3>
-                                <p class="tlc-org"><i class="ph ph-university"></i> SRM University &nbsp;·&nbsp; Chennai, India</p>
-                                <p class="tlc-summary">Specialized in ML &amp; AI. Graduated with a CGPA of <strong>9.1 / 10</strong>.</p>
+                                <p class="tlc-org"><i class="ph ph-university"></i> SRM University &nbsp;·&nbsp;
+                                    Chennai, India</p>
+                                <p class="tlc-summary">Specialized in ML &amp; AI. Graduated with a CGPA of <strong>9.1
+                                        / 10</strong>.</p>
                             </div>
                             <div class="tl-detail-card">
                                 <p class="tlc-section-label"><i class="ph-bold ph-lightning"></i> Highlights</p>
@@ -324,8 +347,10 @@
                                     <li>Robotics Club — built line-following and pathfinding robots</li>
                                     <li>Led ML capstone on real-time sign language translation</li>
                                 </ul>
-                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i> Focus Areas</p>
-                                <div class="tlc-tags"><span>ML / AI</span><span>Python</span><span>IEEE Research</span><span>Robotics</span><span>CGPA 9.1</span></div>
+                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-code"></i>
+                                    Focus Areas</p>
+                                <div class="tlc-tags"><span>ML / AI</span><span>Python</span><span>IEEE
+                                        Research</span><span>Robotics</span><span>CGPA 9.1</span></div>
                             </div>
                         </div>
                     </div>
@@ -345,18 +370,24 @@
                                     <span class="tlc-period">2016 — 2018</span>
                                 </div>
                                 <h3 class="tlc-title">Intermediate — Physics, Chemistry &amp; Mathematics</h3>
-                                <p class="tlc-org"><i class="ph ph-university"></i> Sarada Junior College &nbsp;·&nbsp; Andhra Pradesh, India</p>
-                                <p class="tlc-summary">Built a strong mathematical foundation. Scored a GPA of <strong>9.3 / 10</strong>.</p>
+                                <p class="tlc-org"><i class="ph ph-university"></i> Sarada Junior College &nbsp;·&nbsp;
+                                    Andhra Pradesh, India</p>
+                                <p class="tlc-summary">Built a strong mathematical foundation. Scored a GPA of
+                                    <strong>9.3 / 10</strong>.</p>
                             </div>
                             <div class="tl-detail-card">
                                 <p class="tlc-section-label"><i class="ph-bold ph-lightning"></i> Highlights</p>
                                 <ul>
-                                    <li>GPA <strong>9.3 / 10</strong> — distinction in all three core science subjects</li>
+                                    <li>GPA <strong>9.3 / 10</strong> — distinction in all three core science subjects
+                                    </li>
                                     <li>Developed deep interests in analytical problem-solving</li>
                                     <li>State-level science olympiad — top 10% ranking</li>
                                 </ul>
-                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-atom"></i> Core Subjects</p>
-                                <div class="tlc-tags"><span>Physics</span><span>Chemistry</span><span>Mathematics</span><span>GPA 9.3</span></div>
+                                <p class="tlc-section-label" style="margin-top:14px"><i class="ph-bold ph-atom"></i>
+                                    Core Subjects</p>
+                                <div class="tlc-tags">
+                                    <span>Physics</span><span>Chemistry</span><span>Mathematics</span><span>GPA
+                                        9.3</span></div>
                             </div>
                         </div>
                     </div>
@@ -368,20 +399,24 @@
             <section id="skills" class="section-block services-section flex-split-layout">
                 <div class="services-content-left">
                     <!-- Grand H1 equivalent heading -->
-                    <h1 class="apple-heading" style="font-size: 3.5rem; margin-bottom: 12px; line-height: 1.1;">Engineering<br>the Future.</h1>
-                    
+                    <h1 class="apple-heading" style="font-size: 3.5rem; margin-bottom: 12px; line-height: 1.1;">
+                        Engineering<br>the Future.</h1>
+
                     <!-- H2 Sub-header emphasizing the section -->
-                    <h2 style="font-size: 1.8rem; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 24px; font-family: 'SamsungSharpSans', sans-serif;">
+                    <h2
+                        style="font-size: 1.8rem; font-weight: 500; color: rgba(255,255,255,0.9); margin-bottom: 24px; font-family: 'SamsungSharpSans', sans-serif;">
                         Building scalable digital ecosystems.
                     </h2>
-                    
+
                     <p class="special-dummy-text">
                         <strong>My expertise sits at the intersection of powerful logic and elegant design.</strong>
-                        From scalable backend architectures built on robust cloud infrastructure, to responsive interfaces that captivate users, I approach every engineering challenge holistically.
+                        From scalable backend architectures built on robust cloud infrastructure, to responsive
+                        interfaces that captivate users, I approach every engineering challenge holistically.
                     </p>
-                    
+
                     <p class="special-dummy-text">
-                        <strong>Interact with my technical skills core in the module on the right.</strong> Feel free to reach out to drag, throw, and interact with the nodes using real-world physical mechanics!
+                        <strong>Interact with my technical skills core in the module on the right.</strong> Feel free to
+                        reach out to drag, throw, and interact with the nodes using real-world physical mechanics!
                     </p>
                 </div>
                 <div class="services-content-right">
@@ -394,139 +429,188 @@
             <section id="projects" class="section-block projects-section">
                 <!-- Decorative background elements specific to projects -->
                 <div class="projects-glow"></div>
-                
+
                 <h2 class="edu-main-heading" style="margin-bottom: 8px;">Selected Work</h2>
-                <p class="edu-subheading" style="margin-bottom: 60px;">Architecting digital experiences across AI, full-stack, and mobile platforms.</p>
+                <p class="edu-subheading" style="margin-bottom: 60px;">Architecting digital experiences across AI,
+                    full-stack, and mobile platforms.</p>
 
                 <div class="bento-grid">
                     <!-- Project 1: ML Viz (Featured 2x2) -->
-                    <div class="bento-card featured" onclick="window.open('https://jays-algorithms-visualiser-pyqt.netlify.app', '_blank')" data-scroll>
-                        <div class="bento-bg" style="background: radial-gradient(circle at 10% 20%, rgba(90, 30, 200, 0.45) 0%, rgba(0,0,0,0.9) 100%);"></div>
+                    <div class="bento-card featured"
+                        onclick="window.open('https://jays-algorithms-visualiser-pyqt.netlify.app', '_blank')"
+                        data-scroll>
+                        <div class="bento-bg"
+                            style="background: radial-gradient(circle at 10% 20%, rgba(90, 30, 200, 0.45) 0%, rgba(0,0,0,0.9) 100%);">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
-                                <span class="bento-tag" style="border-color: rgba(167, 139, 250, 0.3); color: #ddd6fe; background: rgba(255,255,255,0.05);">Machine Learning</span>
+                                <span class="bento-tag"
+                                    style="border-color: rgba(167, 139, 250, 0.3); color: #ddd6fe; background: rgba(255,255,255,0.05);">Machine
+                                    Learning</span>
                             </div>
                             <div class="bento-body">
                                 <h3>ML Algorithms Visualization</h3>
-                                <p>Developed a web interface to visually map famous ML Algorithms, demonstrating the crucial importance of hyper-parameter tuning.</p>
-                                <div class="bento-tech"><span>Scikit-learn</span><span>Plotly</span><span>JavaScript</span></div>
+                                <p>Developed a web interface to visually map famous ML Algorithms, demonstrating the
+                                    crucial importance of hyper-parameter tuning.</p>
+                                <div class="bento-tech">
+                                    <span>Scikit-learn</span><span>Plotly</span><span>JavaScript</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 2: Netflix Clone (Tall 1x2) -->
                     <div class="bento-card tall" data-scroll>
-                        <div class="bento-bg" style="background: radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.4) 0%, rgba(0,0,0,0.9) 100%);"></div>
+                        <div class="bento-bg"
+                            style="background: radial-gradient(circle at 50% 0%, rgba(229, 9, 20, 0.4) 0%, rgba(0,0,0,0.9) 100%);">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
                                 <span class="bento-tag fullstack">Fullstack App</span>
                             </div>
                             <div class="bento-body title-centered">
                                 <h3 class="netflix-red">Netflix Clone</h3>
-                                <p>Full stack Netflix clone application engineered with real-time API integrations, robust Node.js backend, and a responsive frontend.</p>
-                                <div class="bento-tech centered-tech"><span>ReactJS</span><span>Node.js</span><span>MongoDB</span></div>
+                                <p>Full stack Netflix clone application engineered with real-time API integrations,
+                                    robust Node.js backend, and a responsive frontend.</p>
+                                <div class="bento-tech centered-tech">
+                                    <span>ReactJS</span><span>Node.js</span><span>MongoDB</span></div>
                             </div>
                             <i class="ph-fill ph-play-circle giant-bento-icon"></i>
                         </div>
                     </div>
 
                     <!-- Project 3: Smart Mirror (Standard 1x1) -->
-                    <div class="bento-card" onclick="window.open('https://jayvinayportfolio.netlify.app/html/pages/smartmirror', '_blank')" data-scroll>
-                        <div class="bento-bg" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(0,0,0,0.95));"></div>
+                    <div class="bento-card"
+                        onclick="window.open('https://jayvinayportfolio.netlify.app/html/pages/smartmirror', '_blank')"
+                        data-scroll>
+                        <div class="bento-bg"
+                            style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(0,0,0,0.95));">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
-                                <span class="bento-tag" style="border-color: rgba(56, 189, 248, 0.3); color: #e0f2fe; background: rgba(255,255,255,0.05);">IoT Engineering</span>
+                                <span class="bento-tag"
+                                    style="border-color: rgba(56, 189, 248, 0.3); color: #e0f2fe; background: rgba(255,255,255,0.05);">IoT
+                                    Engineering</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 1.5rem;">Smart Mirror</h3>
-                                <p>Engineered via Raspberry Pi with Spotify music sync, live news, and push notifications.</p>
+                                <p>Engineered via Raspberry Pi with Spotify music sync, live news, and push
+                                    notifications.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 4: LangChain PDF (Standard 1x1) -->
                     <div class="bento-card" data-scroll>
-                        <div class="bento-bg" style="background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(0,0,0,0.95));"></div>
+                        <div class="bento-bg"
+                            style="background: linear-gradient(135deg, rgba(234, 179, 8, 0.2), rgba(0,0,0,0.95));">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
                                 <span class="bento-tag ai">Generative AI</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 1.5rem;">LangChain PDF Retrieval</h3>
-                                <p>Integrated LangChain with LLMs for intelligent, context-aware querying of raw PDF payloads.</p>
+                                <p>Integrated LangChain with LLMs for intelligent, context-aware querying of raw PDF
+                                    payloads.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 5: Food Delivery (Standard 1x1) -->
                     <div class="bento-card" data-scroll>
-                        <div class="bento-bg" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(0,0,0,0.95));"></div>
+                        <div class="bento-bg"
+                            style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.25), rgba(0,0,0,0.95));">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
-                                <span class="bento-tag" style="border-color: rgba(249, 115, 22, 0.3); color: #ffedd5; background: rgba(255,255,255,0.05);">Mobile Dev</span>
+                                <span class="bento-tag"
+                                    style="border-color: rgba(249, 115, 22, 0.3); color: #ffedd5; background: rgba(255,255,255,0.05);">Mobile
+                                    Dev</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 1.5rem;">Food Delivery Suite</h3>
-                                <p>Built a triple-app ecosystem (delivery, owner, user) powered by Retrofit REST APIs and Jetpack Compose.</p>
+                                <p>Built a triple-app ecosystem (delivery, owner, user) powered by Retrofit REST APIs
+                                    and Jetpack Compose.</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 6: Inventory System (Featured 2x2) -->
-                    <div class="bento-card featured" onclick="window.open('https://jays-inventory-management-system.netlify.app/', '_blank')" data-scroll>
-                        <div class="bento-bg" style="background: radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.3) 0%, rgba(0,0,0,0.9) 100%);"></div>
+                    <div class="bento-card featured"
+                        onclick="window.open('https://jays-inventory-management-system.netlify.app/', '_blank')"
+                        data-scroll>
+                        <div class="bento-bg"
+                            style="background: radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.3) 0%, rgba(0,0,0,0.9) 100%);">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
                                 <span class="bento-tag ui">System Architecture</span>
                             </div>
                             <div class="bento-body">
                                 <h3>Inventory Management</h3>
-                                <p>High-performance GUI built to manage complex inventory workflows. Features Excel data-export pipelines and real-time custom theming options.</p>
-                                <div class="bento-tech"><span>PyQt</span><span>Data Flow</span><span>GUI Pipeline</span></div>
+                                <p>High-performance GUI built to manage complex inventory workflows. Features Excel
+                                    data-export pipelines and real-time custom theming options.</p>
+                                <div class="bento-tech"><span>PyQt</span><span>Data Flow</span><span>GUI Pipeline</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 7: Android Anomaly (Tall 1x2) -->
                     <div class="bento-card tall" data-scroll>
-                        <div class="bento-bg" style="background: radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.3) 0%, rgba(0,0,0,0.9) 100%);"></div>
+                        <div class="bento-bg"
+                            style="background: radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.3) 0%, rgba(0,0,0,0.9) 100%);">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
-                                <span class="bento-tag" style="border-color: rgba(236, 72, 153, 0.3); color: #fce7f3; background: rgba(255,255,255,0.05);">Data Science</span>
+                                <span class="bento-tag"
+                                    style="border-color: rgba(236, 72, 153, 0.3); color: #fce7f3; background: rgba(255,255,255,0.05);">Data
+                                    Science</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 2.2rem; margin-top: 20px;">Android Anomaly Detection</h3>
-                                <p>Implemented Mahalanobis distance matrices analyzing uploaded CSV profiles with real-time UI mapping.</p>
+                                <p>Implemented Mahalanobis distance matrices analyzing uploaded CSV profiles with
+                                    real-time UI mapping.</p>
                                 <div class="bento-tech"><span>Android</span><span>Math</span></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 8: Algorithms Visualizer (Wide 2x1) -->
-                    <div class="bento-card wide" onclick="window.open('https://jays-algorithms-visualiser-pyqt.netlify.app', '_blank')" data-scroll>
-                        <div class="bento-bg" style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0,0,0,0.95));"></div>
+                    <div class="bento-card wide"
+                        onclick="window.open('https://jays-algorithms-visualiser-pyqt.netlify.app', '_blank')"
+                        data-scroll>
+                        <div class="bento-bg"
+                            style="background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(0,0,0,0.95));">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
                                 <span class="bento-tag frontend">Software Engineering</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 1.8rem;">Algorithms Visualization Tool</h3>
-                                <p>Engineered an interactive desktop canvas to actively visualize geometric scaling for sorting, searching, and complex pathfinding routines.</p>
-                                <div class="bento-tech"><span>PyQt</span><span>Sorting</span><span>Pathfinding</span></div>
+                                <p>Engineered an interactive desktop canvas to actively visualize geometric scaling for
+                                    sorting, searching, and complex pathfinding routines.</p>
+                                <div class="bento-tech"><span>PyQt</span><span>Sorting</span><span>Pathfinding</span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 9: Sudoku Solver (Standard 1x1) -->
-                    <div class="bento-card" onclick="window.open('https://jay-sudoku-solver.netlify.app', '_blank')" data-scroll>
-                        <div class="bento-bg" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(0,0,0,0.95));"></div>
+                    <div class="bento-card" onclick="window.open('https://jay-sudoku-solver.netlify.app', '_blank')"
+                        data-scroll>
+                        <div class="bento-bg"
+                            style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(0,0,0,0.95));">
+                        </div>
                         <div class="bento-content">
                             <div class="bento-header">
                                 <span class="bento-tag ui">Algorithm</span>
                             </div>
                             <div class="bento-body">
                                 <h3 style="font-size: 1.5rem;">Sudoku Solver</h3>
-                                <p>Compiled a Python-Tkinter Application tackling deep back-tracking arrays with instantly deployable executable format.</p>
+                                <p>Compiled a Python-Tkinter Application tackling deep back-tracking arrays with
+                                    instantly deployable executable format.</p>
                             </div>
                         </div>
                     </div>
@@ -535,16 +619,19 @@
 
 
             <section id="research" class="section-block research-section">
-                <div class="projects-glow" style="background: radial-gradient(circle, rgba(16, 185, 200, 0.08) 0%, transparent 70%);"></div>
+                <div class="projects-glow"
+                    style="background: radial-gradient(circle, rgba(16, 185, 200, 0.08) 0%, transparent 70%);"></div>
 
                 <h2 class="edu-main-heading" style="margin-bottom: 8px;">Research & Publications</h2>
-                <p class="edu-subheading" style="margin-bottom: 8px;">Discover my in-depth research bridging computer vision, unsupervised learning, and health informatics.</p>
+                <p class="edu-subheading" style="margin-bottom: 8px;">Discover my in-depth research bridging computer
+                    vision, unsupervised learning, and health informatics.</p>
                 <div class="research-hint">
-                    <i class="ph-bold ph-cursor-click"></i> Click on any paper below to view the abstract & publication link.
+                    <i class="ph-bold ph-cursor-click"></i> Click on any paper below to view the abstract & publication
+                    link.
                 </div>
 
                 <div class="research-container">
-                    
+
                     <!-- LEFT COLUMN: List of Papers -->
                     <div class="research-list">
                         <!-- Items rendered via JS or static HTML -->
@@ -586,12 +673,12 @@
                                 <i class="ph-bold ph-x"></i>
                             </button>
                         </div>
-                        
+
                         <div class="reader-body">
                             <h2 class="font-samsung" id="reader-title">Paper Title</h2>
-                            
+
                             <img id="reader-img" src="" alt="Research context" class="reader-image">
-                            
+
                             <div class="reader-abstract">
                                 <h4><i class="ph-bold ph-text-align-left"></i> Abstract</h4>
                                 <p id="reader-copy">Select a paper to read the abstract.</p>
@@ -609,15 +696,19 @@
             <!-- CERTIFICATIONS SECTION -->
             <section id="certifications" class="section-block certifications-section">
                 <!-- Soft Glow -->
-                <div class="projects-glow" style="background: radial-gradient(circle, rgba(255, 198, 0, 0.08) 0%, transparent 70%);"></div>
+                <div class="projects-glow"
+                    style="background: radial-gradient(circle, rgba(255, 198, 0, 0.08) 0%, transparent 70%);"></div>
 
-                <div class="cert-header" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+                <div class="cert-header"
+                    style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
                     <div style="flex: 1;">
                         <h2 class="edu-main-heading" style="margin-bottom: 8px;">Certifications</h2>
-                        <p class="edu-subheading" style="margin-bottom: 0;">Highlighting my commitment to continuous mastery.</p>
+                        <p class="edu-subheading" style="margin-bottom: 0;">Highlighting my commitment to continuous
+                            mastery.</p>
                     </div>
                     <div class="cert-controls">
-                        <button id="cert-focus-btn" class="glass-download-btn" style="width: auto; height: 40px; padding: 0 20px;">
+                        <button id="cert-focus-btn" class="glass-download-btn"
+                            style="width: auto; height: 40px; padding: 0 20px;">
                             <div class="btn-content">
                                 <i class="ph-bold ph-squares-four"></i>
                                 <span class="btn-text">Grid View</span>
@@ -631,7 +722,7 @@
                     <div class="cert-overlay-blur"></div>
                     <!-- Certificates will be injected dynamically by JS -->
                 </div>
-                
+
                 <!-- Expanded Lightbox View for Certificates -->
                 <div class="cert-lightbox hidden-trigger" id="cert-lightbox">
                     <div class="lightbox-backdrop" id="cert-lightbox-close-bg"></div>
@@ -649,7 +740,8 @@
                 <div class="pf-top-grid stagger-trigger">
                     <!-- Column 1: Bio -->
                     <div class="pf-col bio-col">
-                        <p class="pf-bio-text font-samsung">Jay is an independent digital engineer and AI researcher.</p>
+                        <p class="pf-bio-text font-samsung">Jay is an independent digital engineer and AI researcher.
+                        </p>
                     </div>
 
                     <!-- Column 2: Explore -->
@@ -665,10 +757,14 @@
                     <div class="pf-col social-col">
                         <h4 class="pf-col-title">Contact Info</h4>
                         <div class="pf-social-grid">
-                            <a href="mailto:namgirijayvinay@gmail.com" class="pf-pill"><i class="ph-fill ph-envelope-simple"></i> namgirijayvinay@gmail.com</a>
-                            <a href="tel:+919492132662" class="pf-pill"><i class="ph-fill ph-phone"></i> +91 9492132662</a>
-                            <a href="https://www.linkedin.com/in/jay-vinay/" target="_blank" class="pf-pill"><i class="ph-fill ph-linkedin-logo"></i> LinkedIn</a>
-                            <a href="#" target="_blank" class="pf-pill"><i class="ph-fill ph-github-logo"></i> GitHub</a>
+                            <a href="mailto:namgirijayvinay@gmail.com" class="pf-pill"><i
+                                    class="ph-fill ph-envelope-simple"></i> namgirijayvinay@gmail.com</a>
+                            <a href="tel:+919492132662" class="pf-pill"><i class="ph-fill ph-phone"></i> +91
+                                9492132662</a>
+                            <a href="https://www.linkedin.com/in/jay-vinay/" target="_blank" class="pf-pill"><i
+                                    class="ph-fill ph-linkedin-logo"></i> LinkedIn</a>
+                            <a href="#" target="_blank" class="pf-pill"><i class="ph-fill ph-github-logo"></i>
+                                GitHub</a>
                         </div>
                     </div>
 
@@ -676,19 +772,19 @@
                     <div class="pf-col action-col">
                         <a href="mailto:namgirijayvinay@gmail.com" class="pf-action-link magnetic-btn">
                             <div class="pf-action-text">
-                                <span class="pf-action-title">Call Jay</span>
+                                <span class="pf-action-title">Mail Jay</span>
                                 <span class="pf-action-desc">Let's work together</span>
                             </div>
                             <div class="pf-action-icon"><i class="ph-bold ph-arrow-up-right"></i></div>
                         </a>
 
-                        <a href="#" class="pf-action-link magnetic-btn">
+                        <!-- <a href="#" class="pf-action-link magnetic-btn">
                             <div class="pf-action-text">
                                 <span class="pf-action-title">Courses & Tools</span>
                                 <span class="pf-action-desc">Creative tools</span>
                             </div>
                             <div class="pf-action-icon dark"><i class="ph-bold ph-arrow-up-right"></i></div>
-                        </a>
+                        </a> -->
                     </div>
                 </div>
 
@@ -733,7 +829,8 @@
 
             <!-- Description -->
             <p class="card-description">
-                This futuristic assistant seamlessly blends into Jay's environment, offering a modern, flowing conversational space.
+                This futuristic assistant seamlessly blends into Jay's environment, offering a modern, flowing
+                conversational space.
             </p> <!-- FIXED MISSING P TAG -->
 
         </div>

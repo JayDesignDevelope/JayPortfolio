@@ -224,21 +224,21 @@ const researchData = [
       category: "Chapter Publication",
       link: "https://onlinelibrary.wiley.com/doi/10.1002/9781119785620.ch2",
       copy: "Unsupervised learning algorithmic techniques are applied in grouping the data depending upon similar attributes, most similar patterns, or relationships amongst the dataset points or values. These Machine learning models are also referred to as self-organizing models which operate on clustering technique. Distinct approaches are employed on every other algorithm in splitting up data into clusters.",
-      img: "../JayPortfolio/assets/research/book.jpg"
+      img: "assets/research/book.jpg"
     },
     {
       title: "Reconstructing Noised Images of Fashion-MNIST Dataset Using Autoencoders",
       category: "Research",
       link: "https://www.researchgate.net/publication/377614001_Reconstructing_Noised_Images_of_Fashion-MNIST_Dataset_Using_Autoencoders",
       copy: "This study investigates the use of autoencoders for reconstructing noised images from the Fashion-MNIST dataset. By introducing noise to simulate real-world distortions, we evaluate both shallow and deep autoencoder architectures for image denoising. Performance is assessed using metrics like Mean Squared Error (MSE) and Structural Similarity Index (SSIM).",
-      img: "../JayPortfolio/assets/research/encoder.png"
+      img: "assets/research/encoder.png"
     },
     {
       title: "Mudras and Yoga Positions Detection and Recognition using YOLOv7 and Faster R-CNN",
       category: "Conference Paper",
       link: "https://www.researchgate.net/publication/378120515_Mudras_and_Yoga_Positions_Detection_and_Recognition_using_YOLOv7_and_Faster_R-CNN",
       copy: "This paper explores the detection and recognition of mudras and yoga positions using advanced machine learning models, specifically YOLOv7 and Faster R-CNN. The study focuses on the application of these models to accurately identify and classify various hand gestures and body postures associated with yoga practices. The effectiveness of both models is evaluated and compared, highlighting their performance in terms of accuracy and speed.",
-      img: "../JayPortfolio/assets/research/cnn.jpg"
+      img: "assets/research/cnn.jpg"
     }
 ];
 
